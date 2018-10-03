@@ -4,7 +4,7 @@
   "parameters": {
     "virtualNetworkName": {
       "type": "string",
-      "defaultValue": "[concat(resourceGroup().Name,'-VNet')]",
+      "defaultValue": "VNet",
       "metadata": {
         "description": "Name for new virtual network"
       }
@@ -14,6 +14,20 @@
       "defaultValue": "192.168.0.0/16",
       "metadata": {
         "description": "Prefix for new virtual network"
+      }
+    },
+    "subnetName": {
+      "type": "string",
+      "defaultValue": "subNet",
+      "metadata": {
+        "description": "Name for new virtual sunnet"
+      }
+    },
+    "subnetPrefix": {
+      "type": "string",
+      "defaultValue": "192.168.1.0/24",
+      "metadata": {
+        "description": "Prefix for new virtual subnet"
       }
     },
     "location": {
@@ -26,11 +40,21 @@
         "metadata": {
           "description": "Location for all resources."
         }
+      },
+    "secGroupName": {
+      "type": "string",
+      "defaultValue": "NSG",
+      "metadata": {
+        "description": "Name for network security group"
       }
+    }
   },
   "variables": {
-      "subnetName": "[concat(resourceGroup().Name,'-subnet1')]",
-      "subnetPrefix": "192.168.1.0/24",
+      "location": "[parameters('subnetPrefix')]",
+      "virtualNetworkName": "[concat(resourceGroup().Name,'',copyIndex(1))]",
+      "addressPrefix": "[concat(resourceGroup().Name,'',copyIndex(1))]",
+      "subnetName": "[concat(resourceGroup().Name,'-subnet',copyIndex(1))]",
+      "subnetPrefix": "[parameters('subnetPrefix')]",
       "secGroupName": "[concat(resourceGroup().Name,'-secGroup')]",
       "secGroupRuleName": "AccessToTestWeb",
       "secGroupAddressPrefixIn": "86.57.255.88/29"
@@ -40,7 +64,7 @@
       "name": "[variables('secGroupName')]",
       "type": "Microsoft.Network/networkSecurityGroups",
       "apiVersion": "2018-08-01",
-      "location": "[parameters('location')]",
+      "location": "[variables('location')]",
       "properties": {
         "securityRules": [
           {
@@ -50,7 +74,7 @@
               "destinationPortRange": "3389",
               "sourceAddressPrefix": "[variables('secGroupAddressPrefixIn')]",
               "sourcePortRange": "*",
-              "destinationAddressPrefix": "[parameters('addressPrefix')]",
+              "destinationAddressPrefix": "[variables('addressPrefix')]",
               "destinationPortRanges": "*",
               "access": "Allow",
               "priority": 100,
@@ -64,18 +88,18 @@
     {
       "apiVersion": "2015-05-01-preview",
       "type": "Microsoft.Network/virtualNetworks",
-      "name": "[parameters('virtualNetworkName')]",
-      "location": "[parameters('location')]",
+      "name": "[variables('virtualNetworkName')]",
+      "location": "[variables('location')]",
       "properties": {
         "addressSpace": {
           "addressPrefixes": [
-            "[parameters('addressPrefix')]"
+            "[variables('addressPrefix')]"
           ]
         },
         "subnets": [
           {
             "name": "[variables('subnetName')]",
-            "location": "[parameters('location')]",
+            "location": "[variables('location')]",
             "properties":{
               "addressPrefix": "[variables('subnetPrefix')]"
             }
