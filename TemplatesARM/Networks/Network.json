@@ -1,0 +1,87 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworkName": {
+      "type": "string",
+      "defaultValue": "[concat(resourceGroup().Name,'-VNet')]",
+      "metadata": {
+        "description": "Name for new virtual network"
+      }
+    },
+    "addressPrefix": {
+      "type": "string",
+      "defaultValue": "192.168.0.0/16",
+      "metadata": {
+        "description": "Prefix for new virtual network"
+      }
+    },
+    "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "allowedValues": [
+            "northeurope",
+            "eastasia"
+        ],
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      }
+  },
+  "variables": {
+      "subnetName": "[concat(resourceGroup().Name,'-subnet1')]",
+      "subnetPrefix": "192.168.1.0/24",
+      "secGroupName": "[concat(resourceGroup().Name,'-secGroup')]",
+      "secGroupRuleName": "AccessToTestWeb",
+      "secGroupAddressPrefixIn": "86.57.255.88/29"
+  },
+  "resources": [
+    {
+      "name": "[variables('secGroupName')]",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "apiVersion": "2018-08-01",
+      "location": "[parameters('location')]",
+      "properties": {
+        "securityRules": [
+          {
+            "properties": {
+              "description": "[variables('secGroupRuleName')]",
+              "protocol": "Tcp",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "[variables('secGroupAddressPrefixIn')]",
+              "sourcePortRange": "*",
+              "destinationAddressPrefix": "[parameters('addressPrefix')]",
+              "destinationPortRanges": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            },
+            "name": "[variables('secGroupRuleName')]"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "2015-05-01-preview",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[parameters('virtualNetworkName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('addressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('subnetName')]",
+            "location": "[parameters('location')]",
+            "properties":{
+              "addressPrefix": "[variables('subnetPrefix')]"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
