@@ -50,12 +50,12 @@
     }
   },
   "variables": {
-      "location": "[parameters('subnetPrefix')]",
-      "virtualNetworkName": "[concat(resourceGroup().Name,'',copyIndex(1))]",
-      "addressPrefix": "[concat(resourceGroup().Name,'',copyIndex(1))]",
-      "subnetName": "[concat(resourceGroup().Name,'-subnet',copyIndex(1))]",
+      "location": "[parameters('location')]",
+      "virtualNetworkName": "[concat(resourceGroup().Name,parameters('virtualNetworkName'),copyIndex(1))]",
+      "addressPrefix": "[concat(resourceGroup().Name,parameters('addressPrefix'),copyIndex(1))]",
+      "subnetName": "[concat(resourceGroup().Name,parameters('subnetName'),copyIndex(1))]",
       "subnetPrefix": "[parameters('subnetPrefix')]",
-      "secGroupName": "[concat(resourceGroup().Name,'-secGroup')]",
+      "secGroupName": "[concat(resourceGroup().Name,parameters('secGroupName'))]",
       "secGroupRuleName": "AccessToTestWeb",
       "secGroupAddressPrefixIn": "86.57.255.88/29"
   },
@@ -63,7 +63,7 @@
     {
       "name": "[variables('secGroupName')]",
       "type": "Microsoft.Network/networkSecurityGroups",
-      "apiVersion": "2018-08-01",
+      "apiVersion": "2017-06-01",
       "location": "[variables('location')]",
       "properties": {
         "securityRules": [
