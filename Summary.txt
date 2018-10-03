@@ -5,5 +5,3 @@ TestWeb
 Creds for VMs:
 sa
 LiLPbQ58Nsus
-
-something else
