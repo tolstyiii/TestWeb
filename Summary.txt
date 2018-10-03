@@ -1,0 +1,7 @@
+Azure TEST
+Tags:
+TestWeb
+
+Creds for VMs:
+sa
+LiLPbQ58Nsus
