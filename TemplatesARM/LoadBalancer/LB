@@ -1,0 +1,123 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+              "description": "Location for all resources."
+            }
+          },
+        "LoadBalancerName": {
+            "type": "string",
+            "defaultValue": "LB",
+            "metadata": {
+                "description": "Name of Load Balancer"
+            }
+        }
+    },
+    "variables": {
+        "LoadBalancerName": "[concat(resourceGroup().Name, parameters('LoadBalancerName'))]",
+        "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LoadBalancerFrontEnd')]",
+        "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LoadBalancerName'))]",
+        "lbProbeID": "[concat(variables('lbID'),'/probes/LoadBalancerProbe80')]",
+        "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/LBBackEnd')]",
+        "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
+        "publicIPAddressName": "[concat(resourceGroup().Name, 'PublicIP')]",
+    },
+    "resources": [
+      {
+        
+        "name": "[variables('LoadBalancerName')]",
+        "type": "Microsoft.Network/loadBalancers",
+        "apiVersion": "2018-08-01",
+        "location": "[parameters('location')]",
+        "dependsOn": [
+            "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]"
+        ],
+        "properties": {
+            "frontendIPConfigurations": [
+            {
+                "name": "LBFrontEnd",
+                "properties": {
+                    "publicIPAddress": {
+                        "id": "[variables('publicIPAddressID')]"
+                    }
+                }
+            }
+            ],
+            "backendAddressPools": [
+            {
+                "name": "LBBackEnd"
+            }
+            ],
+            "loadBalancingRules": [
+            {
+                "name": "LoadBalancingRule80",
+                "properties": {
+                "frontendIPConfiguration": {
+                    "id": "[variables('frontEndIPConfigID')]"
+                },
+                "backendAddressPool": {
+                    "id": "[variables('lbPoolID')]"
+                },
+                "probe": 
+                    {
+                    "id": "[variables('lbProbeID')]"
+                    },
+                "protocol": "Tcp",
+                "frontendPort": 80,
+                "backendPort": 80,
+                "idleTimeoutInMinutes": 5,
+                "enableFloatingIP": false
+                }
+            }
+            ],
+            "probes": [
+            {
+                "name": "LoadBalancerProbe80",
+                "properties": {
+                "protocol": "Tcp",
+                "port": 80,
+                "intervalInSeconds": 15,
+                "numberOfProbes": 2
+                }
+            }
+            ],
+            "inboundNatRules": [
+            {
+                "name": "RDPVM1",
+                "properties": {
+                "frontendIPConfiguration": {
+                    "id": "[variables('frontEndIPConfigID')]"
+                },
+                "protocol": "Tcp",
+                "frontendPort": 33891,
+                "backendPort": 3389,
+                "enableFloatingIP": false
+                }              
+            },
+            {
+                "name": "RDPVM2",
+                "properties": {
+                    "frontendIPConfiguration": {
+                        "id": "[variables('frontEndIPConfigID')]"
+                    },
+                    "protocol": "Tcp",
+                    "frontendPort": 33892,
+                    "backendPort": 3389,
+                    "enableFloatingIP": false
+                    }               
+                }
+            ]
+        }
+      }
+    ],
+    "outputs": {
+        "ipaddress": {
+            "value": "[reference(variables('publicIPAddressname')).ipAddress]",
+            "type": "string"
+        }
+    }
+}

@@ -25,7 +25,7 @@
           },
         "name": {
             "type": "string",
-            "defaultValue": "testwebstorageacc",
+            "defaultValue": "[concat(resourceGroup().Name,'storageacc')]",
             "metadata": {
               "description": "The name for storage account."
             }
