@@ -24,7 +24,7 @@
         "lbProbeID": "[concat(variables('lbID'),'/probes/LoadBalancerProbe80')]",
         "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/LBBackEnd')]",
         "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
-        "publicIPAddressName": "[concat(resourceGroup().Name, 'PublicIP')]",
+        "publicIPAddressName": "[concat(resourceGroup().Name, 'PublicIP')]"
     },
     "resources": [
       {
