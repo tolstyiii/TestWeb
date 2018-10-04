@@ -30,55 +30,55 @@
               "description": "The name for storage account."
             }
           },
-          "virtualNetworkName": {
+        "virtualNetworkName": {
             "type": "string",
             "defaultValue": "VNet",
             "metadata": {
-              "description": "Name for new virtual network"
+                "description": "Name for new virtual network"
             }
-          },
-          "addressPrefix": {
+        },
+        "addressPrefix": {
             "type": "string",
             "defaultValue": "192.168.0.0/16",
             "metadata": {
-              "description": "Prefix for new virtual network"
+                "description": "Prefix for new virtual network"
             }
-          },
-          "subnetName": {
+        },
+        "subnetName": {
             "type": "string",
             "defaultValue": "subNet",
             "metadata": {
-              "description": "Name for new virtual sunnet"
+                "description": "Name for new virtual sunnet"
             }
-          },
-          "subnetPrefix": {
+        },
+        "subnetPrefix": {
             "type": "string",
             "defaultValue": "192.168.1.0/24",
             "metadata": {
-              "description": "Prefix for new virtual subnet"
+                "description": "Prefix for new virtual subnet"
             }
-          },
-          "secGroupName": {
+        },
+        "secGroupName": {
             "type": "string",
             "defaultValue": "NSG",
             "metadata": {
-              "description": "Name for network security group"
+                "description": "Name for network security group"
             }
-          },
-          "secGroupRuleName": {
+        },
+        "secGroupRuleName": {
             "type": "string",
             "defaultValue": "AccessToTestWeb",
             "metadata": {
-              "description": "Name of rule for access to network security group"
+                "description": "Name of rule for access to network security group"
             }
-          },
-          "secGroupAddressPrefixIn": {
+        },
+        "secGroupAddressPrefixIn": {
             "type": "string",
             "defaultValue": "86.57.255.88/29",
             "metadata": {
-              "description": "Prefix for network for access to security group"
+                "description": "Prefix for network for access to security group"
             }
-          }
+        }
       },
     "variables": {
         "tempatesWholePartLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/",
