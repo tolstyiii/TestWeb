@@ -29,17 +29,6 @@
             "metadata": {
               "description": "The name for storage account."
             }
-<<<<<<< HEAD
-          }
-      },
-    "variables": {
-        "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]",
-        "templateStorageAccLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/StorageAcc/StorageAcc.json"
-    },
-    "resources": [
-        {
-            "apiVersion": "2017-05-10",
-=======
           },
           "virtualNetworkName": {
             "type": "string",
@@ -99,7 +88,6 @@
     "resources": [
         {
             "apiVersion": "2015-01-01",
->>>>>>> TestWeb-ARMTemplatesSeparating
             "name": "nestedStorageAcc",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -110,11 +98,7 @@
                 },
                 "parameters": {
                     "StorageAccName": {
-<<<<<<< HEAD
-                        "value": "[variables('StorageAccName')]"
-=======
                         "value": "[parameters('StorageAccName')]"
->>>>>>> TestWeb-ARMTemplatesSeparating
                     },
                     "storageSKU": {
                         "value": "[parameters('storageSKU')]"
@@ -124,8 +108,6 @@
                     }
                 }
             }
-<<<<<<< HEAD
-=======
         },
         {
             "apiVersion": "2015-01-01",
@@ -167,7 +149,6 @@
                     }
                 }
             }
->>>>>>> TestWeb-ARMTemplatesSeparating
         }
     ]
 }

@@ -40,11 +40,7 @@
           "sku": {
             "name": "[parameters('storageSKU')]"
           },
-<<<<<<< HEAD
           "name": "[parameters('StorageAccName')]"
-=======
-          "name": "[variables('StorageAccName')]"
->>>>>>> TestWeb-ARMTemplatesSeparating
         }
       ]
 }
