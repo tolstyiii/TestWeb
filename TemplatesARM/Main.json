@@ -33,7 +33,7 @@
       },
     "variables": {
         "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]",
-        "templateStorageAccLink": "https://csb58cb12e8660ax4f54xb73.file.core.windows.net/testweb/StorageAcc.json"
+        "templateStorageAccLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/StorageAcc/StorageAcc.json"
     },
     "resources": [
         {
