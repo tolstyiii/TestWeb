@@ -33,11 +33,11 @@
       },
     "variables": {
         "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]",
-        "templateStorageAccLink": "https://github.com/tolstyiii/TestWeb/blob/master/TemplatesARM/StorageAcc/StorageAcc.json"
+        "templateStorageAccLink": "https://csb58cb12e8660ax4f54xb73.file.core.windows.net/testweb/StorageAcc.json"
     },
     "resources": [
         {
-            "apiVersion": "2015-01-01",
+            "apiVersion": "2017-05-10",
             "name": "nestedStorageAcc",
             "type": "Microsoft.Resources/deployments",
             "properties": {
