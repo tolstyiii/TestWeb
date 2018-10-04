@@ -29,16 +29,18 @@
           }
       },
     "variables": {
-      "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]"
+      "location": "[parameters('location')]",
+      "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]",
+      "storageSKU": "[parameters('storageSKU')]"
     },
     "resources": [
         {
           "type": "Microsoft.Storage/storageAccounts",
           "apiVersion": "2018-02-01",
-          "location": "[parameters('location')]",
+          "location": "[variables('location')]",
           "kind": "Storage",
           "sku": {
-            "name": "[parameters('storageSKU')]"
+            "name": "[variables('storageSKU')]"
           },
           "name": "[variables('StorageAccName')]"
         }

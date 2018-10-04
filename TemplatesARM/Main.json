@@ -22,14 +22,14 @@
             "metadata": {
               "description": "Location for all resources."
             }
-          },
+        },
         "StorageAccName": {
             "type": "string",
             "defaultValue": "storageacc",
             "metadata": {
               "description": "The name for storage account."
             }
-          },
+        },
         "virtualNetworkName": {
             "type": "string",
             "defaultValue": "VNet",
@@ -78,12 +78,70 @@
             "metadata": {
                 "description": "Prefix for network for access to security group"
             }
+        },
+        "LoadBalancerName": {
+            "type": "string",
+            "defaultValue": "LB",
+            "metadata": {
+                "description": "Name of Load Balancer"
+            }
+        },
+        "IPAllocationMethodLB": {
+            "type": "string",
+            "defaultValue": "Dynamic",
+            "allowedValues": [
+                "Dynamic",
+                "Static"
+            ]
+        },
+        "publicIPAddressName": {
+            "type": "string",
+            "defaultValue": "PublicIP",
+            "metadata": {
+                "description": "Name of resource Public IP Address"
+            }
+        },
+        "frontendIPConfigurationsName": {
+            "type": "string",
+            "defaultValue": "LBFrontEnd",
+            "metadata": {
+                "description": "Name of Load Balancer frontend IPConfigurations"
+            }
+        },
+        "backendAddressPoolsName": {
+            "type": "string",
+            "defaultValue": "LBBackEnd",
+            "metadata": {
+                "description": "Name of Load Balancer backend AddressPools"
+            }
+        },
+        "probeName": {
+            "type": "string",
+            "defaultValue": "LoadBalancerProbe80",
+            "metadata": {
+                "description": "Name of Load Balancer probe"
+            }
+        },
+        "loadBalancingRulesName": {
+            "type": "string",
+            "defaultValue": "LoadBalancingRule80",
+            "metadata": {
+                "description": "Name of Load Balancing rule"
+            }
+        },
+        "inboundNatRulesName": {
+            "type": "string",
+            "defaultValue": "RDPVM",
+            "metadata": {
+                "description": "Name of Load Balancer Nat rules (RDP)"
+            }
         }
       },
     "variables": {
         "tempatesWholePartLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/",
         "templateStorageAccLink": "[concat(variables('tempatesWholePartLink'),'StorageAcc/StorageAcc.json')]",
-        "TemplateNetworks": "[concat(variables('tempatesWholePartLink'),'Networks/Network.json')]"
+        "TemplateNetworks": "[concat(variables('tempatesWholePartLink'),'Networks/Network.json')]",
+        "TemplateLB": "[concat(variables('tempatesWholePartLink'),'LoadBalancer/LB.json')]"
     },
     "resources": [
         {
@@ -146,6 +204,29 @@
                     }
                 }
             }
-        }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "nestedStorageAcc",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('templateStorageAccLink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "StorageAccName": {
+                        "value": "[parameters('StorageAccName')]"
+                    },
+                    "storageSKU": {
+                        "value": "[parameters('storageSKU')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    }
+                }
+            }
+        },
     ]
 }

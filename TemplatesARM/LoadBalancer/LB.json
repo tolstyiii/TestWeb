@@ -15,39 +15,89 @@
             "metadata": {
                 "description": "Name of Load Balancer"
             }
+        },
+        "IPAllocationMethodLB": {
+            "type": "string",
+            "allowedValues": [
+                "Dynamic",
+                "Static"
+            ]
+        },
+        "publicIPAddressName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of resource Public IP Address"
+            }
+        },
+        "frontendIPConfigurationsName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Load Balancer frontend IPConfigurations"
+            }
+        },
+        "backendAddressPoolsName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Load Balancer backend AddressPools"
+            }
+        },
+        "probeName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Load Balancer probe"
+            }
+        },
+        "loadBalancingRulesName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Load Balancing rule"
+            }
+        },
+        "inboundNatRulesName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of Load Balancer Nat rules (RDP)"
+            }
         }
     },
     "variables": {
+        "location": "[parameters('location')]",
         "LoadBalancerName": "[concat(resourceGroup().Name,'-', parameters('LoadBalancerName'))]",
-        "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/LBFrontEnd')]",
+        "frontendIPConfigurationsName": "[parameters('frontendIPConfigurationsName')]",
+        "frontEndIPConfigID": "[concat(variables('lbID'),'/frontendIPConfigurations/',parameters('frontendIPConfigurationsName'))]",
         "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LoadBalancerName'))]",
-        "lbProbeID": "[concat(variables('lbID'),'/probes/LoadBalancerProbe80')]",
-        "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/LBBackEnd')]",
+        "lbProbeID": "[concat(variables('lbID'),'/probes/',variables('probeName'))]",
+        "backendAddressPoolsName": "[parameters('backendAddressPoolsName')]",
+        "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/',parameters('backendAddressPoolsName'))]",
         "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
-        "publicIPAddressName": "[concat(resourceGroup().Name, '-PublicIP')]"
+        "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'))]",
+        "IPAllocationMethodLB": "[parameters('IPAllocationMethodLB')]",
+        "probeName": "[parameters('probeName')]",
+        "loadBalancingRulesName": "[parameters('probeName')]",
+        "inboundNatRulesName": "[parameters('inboundNatRulesName')]"
     },
     "resources": [
       {
         "apiVersion": "2016-03-30",
         "type": "Microsoft.Network/publicIPAddresses",
         "name": "[variables('publicIPAddressName')]",
-        "location": "[parameters('location')]",
+        "location": "[variables('location')]",
         "properties": {
-          "publicIPAllocationMethod": "Dynamic"
+          "publicIPAllocationMethod": "[variables('IPAllocationMethodLB')]"
         }
       },
       {
         "name": "[variables('LoadBalancerName')]",
         "type": "Microsoft.Network/loadBalancers",
         "apiVersion": "2018-08-01",
-        "location": "[parameters('location')]",
+        "location": "[variables('location')]",
         "dependsOn": [
             "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]"
         ],
         "properties": {
             "frontendIPConfigurations": [
             {
-                "name": "LBFrontEnd",
+                "name": "[variables('frontendIPConfigurationsName')]",
                 "properties": {
                     "publicIPAddress": {
                         "id": "[variables('publicIPAddressID')]"
@@ -57,12 +107,12 @@
             ],
             "backendAddressPools": [
             {
-                "name": "LBBackEnd"
+                "name": "[variables('backendAddressPoolsName')]"
               }
             ],
             "loadBalancingRules": [
             {
-                "name": "LoadBalancingRule80",
+                "name": "[variables('loadBalancingRulesName')]",
                 "properties": {
                 "frontendIPConfiguration": {
                     "id": "[variables('frontEndIPConfigID')]"
@@ -84,7 +134,7 @@
             ],
             "probes": [
             {
-                "name": "LoadBalancerProbe80",
+                "name": "[variables('probeName')]",
                 "properties": {
                 "protocol": "Tcp",
                 "port": 80,
@@ -95,7 +145,7 @@
             ],
             "inboundNatRules": [
             {
-                "name": "RDPVM1",
+                "name": "[concat(variables('inboundNatRulesName'),'1')]",
                 "properties": {
                 "frontendIPConfiguration": {
                     "id": "[variables('frontEndIPConfigID')]"
@@ -107,7 +157,7 @@
                 }              
               },
             {
-                "name": "RDPVM2",
+                "name": "[concat(variables('inboundNatRulesName'),'2')]",
                 "properties": {
                     "frontendIPConfiguration": {
                         "id": "[variables('frontEndIPConfigID')]"

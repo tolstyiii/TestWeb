@@ -63,6 +63,14 @@
               "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
             }
           },
+          "IPAllocationMethod": {
+            "type": "string",
+            "defaultValue": "Dynamic",
+            "allowedValues": [
+                "Dynamic",
+                "Static"
+            ]
+          },
           "count": {
               "type": "int",
               "defaultValue": 1,
