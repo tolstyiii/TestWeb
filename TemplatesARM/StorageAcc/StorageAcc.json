@@ -28,6 +28,9 @@
             }
           }
       },
+    "variables": {
+      "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]"
+    },
     "resources": [
         {
           "type": "Microsoft.Storage/storageAccounts",
@@ -37,7 +40,11 @@
           "sku": {
             "name": "[parameters('storageSKU')]"
           },
+<<<<<<< HEAD
           "name": "[parameters('StorageAccName')]"
+=======
+          "name": "[variables('StorageAccName')]"
+>>>>>>> TestWeb-ARMTemplatesSeparating
         }
       ]
 }

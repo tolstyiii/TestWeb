@@ -29,6 +29,7 @@
             "metadata": {
               "description": "The name for storage account."
             }
+<<<<<<< HEAD
           }
       },
     "variables": {
@@ -38,6 +39,67 @@
     "resources": [
         {
             "apiVersion": "2017-05-10",
+=======
+          },
+          "virtualNetworkName": {
+            "type": "string",
+            "defaultValue": "VNet",
+            "metadata": {
+              "description": "Name for new virtual network"
+            }
+          },
+          "addressPrefix": {
+            "type": "string",
+            "defaultValue": "192.168.0.0/16",
+            "metadata": {
+              "description": "Prefix for new virtual network"
+            }
+          },
+          "subnetName": {
+            "type": "string",
+            "defaultValue": "subNet",
+            "metadata": {
+              "description": "Name for new virtual sunnet"
+            }
+          },
+          "subnetPrefix": {
+            "type": "string",
+            "defaultValue": "192.168.1.0/24",
+            "metadata": {
+              "description": "Prefix for new virtual subnet"
+            }
+          },
+          "secGroupName": {
+            "type": "string",
+            "defaultValue": "NSG",
+            "metadata": {
+              "description": "Name for network security group"
+            }
+          },
+          "secGroupRuleName": {
+            "type": "string",
+            "defaultValue": "AccessToTestWeb",
+            "metadata": {
+              "description": "Name of rule for access to network security group"
+            }
+          },
+          "secGroupAddressPrefixIn": {
+            "type": "string",
+            "defaultValue": "86.57.255.88/29",
+            "metadata": {
+              "description": "Prefix for network for access to security group"
+            }
+          }
+      },
+    "variables": {
+        "tempatesWholePartLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/",
+        "templateStorageAccLink": "[concat(variables('tempatesWholePartLink'),'StorageAcc/StorageAcc.json')]",
+        "TemplateNetworks": "[concat(variables('tempatesWholePartLink'),'Networks/Network.json')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-01-01",
+>>>>>>> TestWeb-ARMTemplatesSeparating
             "name": "nestedStorageAcc",
             "type": "Microsoft.Resources/deployments",
             "properties": {
@@ -48,7 +110,11 @@
                 },
                 "parameters": {
                     "StorageAccName": {
+<<<<<<< HEAD
                         "value": "[variables('StorageAccName')]"
+=======
+                        "value": "[parameters('StorageAccName')]"
+>>>>>>> TestWeb-ARMTemplatesSeparating
                     },
                     "storageSKU": {
                         "value": "[parameters('storageSKU')]"
@@ -58,6 +124,50 @@
                     }
                 }
             }
+<<<<<<< HEAD
+=======
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "nestedNetworks",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('TemplateNetworks')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "virtualNetworkName": {
+                        "value": "[parameters('virtualNetworkName')]"
+                    },
+                    "addressPrefix": {
+                        "value": "[parameters('addressPrefix')]"
+                    },
+                    "subnetName": {
+                        "value": "[parameters('subnetName')]"
+                    },
+                    "subnetPrefix": {
+                        "value": "[parameters('subnetPrefix')]"
+                    },
+                    "subnetPrefix": {
+                        "value": "[parameters('subnetPrefix')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "secGroupName": {
+                        "value": "[parameters('secGroupName')]"
+                    },
+                    "secGroupRuleName": {
+                        "value": "[parameters('secGroupRuleName')]"
+                    },
+                    "secGroupAddressPrefixIn": {
+                        "value": "[parameters('secGroupAddressPrefixIn')]"
+                    }
+                }
+            }
+>>>>>>> TestWeb-ARMTemplatesSeparating
         }
     ]
 }
