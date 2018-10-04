@@ -40,7 +40,7 @@
           "sku": {
             "name": "[parameters('storageSKU')]"
           },
-          "name": "[parameters('StorageAccName')]"
+          "name": "[variables('StorageAccName')]"
         }
       ]
 }
