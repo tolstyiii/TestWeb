@@ -1,0 +1,63 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageSKU": {
+          "type": "string",
+          "allowedValues": [
+            "Standard_LRS",
+            "Standard_ZRS",
+            "Standard_GRS",
+            "Standard_RAGRS",
+            "Premium_LRS"
+          ],
+          "defaultValue": "Standard_LRS",
+          "metadata": {
+            "description": "The type of replication to use for the storage account."
+          }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+              "description": "Location for all resources."
+            }
+          },
+        "StorageAccName": {
+            "type": "string",
+            "defaultValue": "storageacc",
+            "metadata": {
+              "description": "The name for storage account."
+            }
+          }
+      },
+    "variables": {
+        "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]",
+        "templateStorageAccLink": "https://github.com/tolstyiii/TestWeb/blob/master/TemplatesARM/StorageAcc/StorageAcc.json"
+    },
+    "resources": [
+        {
+            "apiVersion": "2015-01-01",
+            "name": "nestedStorageAcc",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('templateStorageAccLink')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "StorageAccName": {
+                        "value": "[variables('StorageAccName')]"
+                    },
+                    "storageSKU": {
+                        "value": "[parameters('storageSKU')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    }
+                }
+            }
+        }
+    ]
+}
