@@ -1,0 +1,84 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "type": "string",
+            "defaultValue": "sa",
+            "metadata": {
+              "description": "Username for the Virtual Machine."
+            }
+          },
+          "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+              "description": "Password for the Virtual Machine."
+            }
+          },
+          "windowsOSVersion": {
+            "type": "string",
+            "defaultValue": "2016-Datacenter",
+            "allowedValues": [
+              "2008-R2-SP1",
+              "2012-Datacenter",
+              "2012-R2-Datacenter",
+              "2016-Nano-Server",
+              "2016-Datacenter-with-Containers",
+              "2016-Datacenter"
+            ],
+            "metadata": {
+              "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+            }
+          },
+          "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+              "description": "Location for all resources."
+            }
+          },
+          "vmSize": {
+            "type": "string",
+            "allowedValues": [
+                "Basic_A1",
+                "Standard_A1",
+                "Standard_A1_v2",
+                "Standard_F1s",
+                "Standard_F1",
+                "Standard_B1ms",
+                "Standard_D1_v2",
+                "Standard_A2",
+                "Standard_D1",
+                "Standard_DS1",
+                "Basic_A2",
+                "Standard_DS1_v2",
+                "Standard_F2s_v2",
+                "Standard_A2_v2",
+                "Standard_B2s",
+                "Standard_F2s",
+                "Standard_F2"
+            ],
+            "defaultValue": "Standard_A1",
+            "metadata": {
+              "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
+            }
+          },
+          "count": {
+              "type": "int",
+              "defaultValue": 1,
+              "minValue": 1,
+              "maxValue": 5,
+              "metadata": {
+                  "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
+              }
+          }
+    },
+    "variables": {
+        "nicName": "[concat(resourceGroup().Name, '-VMNic')]",
+        "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
+        "vmName": "[concat(resourceGroup().Name, '-VM')]"
+    },
+    "resources": [
+        
+    ]
+}
