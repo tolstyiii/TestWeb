@@ -11,21 +11,18 @@
             "Standard_RAGRS",
             "Premium_LRS"
           ],
-          "defaultValue": "Standard_LRS",
           "metadata": {
             "description": "The type of replication to use for the storage account."
           }
         },
         "location": {
             "type": "string",
-            "defaultValue": "[resourceGroup().location]",
             "metadata": {
               "description": "Location for all resources."
             }
           },
-        "name": {
+        "StorageAccName": {
             "type": "string",
-            "defaultValue": "[concat(resourceGroup().Name,'storageacc')]",
             "metadata": {
               "description": "The name for storage account."
             }
@@ -40,7 +37,7 @@
           "sku": {
             "name": "[parameters('storageSKU')]"
           },
-          "name": "[parameters('name')]"
+          "name": "[variables('StorageAccName')]"
         }
       ]
 }
