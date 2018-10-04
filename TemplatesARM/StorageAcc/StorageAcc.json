@@ -28,6 +28,9 @@
             }
           }
       },
+    "variables": {
+      "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]"
+    },
     "resources": [
         {
           "type": "Microsoft.Storage/storageAccounts",
