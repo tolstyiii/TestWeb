@@ -260,6 +260,9 @@
             "apiVersion": "2015-01-01",
             "name": "nestedLoadBalancer",
             "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[concat('Microsoft.Network/publicIPAddresses/',parameters('publicIPAddressName'))]"
+            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {

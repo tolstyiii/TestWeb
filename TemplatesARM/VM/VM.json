@@ -127,11 +127,11 @@
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[concat(variables('nicName'),copyIndex(1))]",
         "location": "[variables('location')]",
-        "dependsOn": [
+        /*"dependsOn": [
           "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
           "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
           "[concat('Microsoft.Network/loadBalancers/', variables('LoadBalancerName'))]"
-        ],
+        ],*/
         "properties": {
           "ipConfigurations": [
             {
@@ -165,10 +165,10 @@
         "type": "Microsoft.Compute/virtualMachines",
         "name": "[concat(variables('vmName'),copyIndex(1))]",
         "location": "[variables('location')]",
-        "dependsOn": [
+        /*"dependsOn": [
           "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))]",
           "[resourceId('Microsoft.Network/networkInterfaces/', concat(variables('nicName'),copyIndex(1)))]"
-        ],
+        ],*/
         "properties": {
           "hardwareProfile": {
             "vmSize": "[variables('vmSize')]"
@@ -203,13 +203,13 @@
               }
             ]
           },
-          "diagnosticsProfile": {
+          /*"diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": true,
               "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccName'))).primaryEndpoints.blob]"
             }
           }
-        },
+        },*/
         "copy": {
             "name": "VMCopy",
             "count": "[variables('count')]"
