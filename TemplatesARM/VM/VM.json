@@ -107,7 +107,7 @@
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
         "vmName": "[concat(resourceGroup().Name,'-',parameters('VMName'))]",
         "location": "[parameters('location')]",
-        "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'),'AddressName')]",
+        "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'))]",
         "virtualNetworkName": "[parameters('virtualNetworkName')]",
         "LoadBalancerName": "[parameters('LoadBalancerName')]",
         "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LoadBalancerName'))]",
