@@ -128,9 +128,9 @@
         "name": "[concat(variables('nicName'),copyIndex(1))]",
         "location": "[variables('location')]",
         "dependsOn": [
-          "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-          "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-          "[resourceId('Microsoft.Network/loadBalancers/', variables('LoadBalancerName'))]"
+          "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
+          "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+          "[concat('Microsoft.Network/loadBalancers/', variables('LoadBalancerName'))]"
         ],
         "properties": {
           "ipConfigurations": [
@@ -165,10 +165,6 @@
         "type": "Microsoft.Compute/virtualMachines",
         "name": "[concat(variables('vmName'),copyIndex(1))]",
         "location": "[variables('location')]",
-        "dependsOn": [
-          "[resourceId('Microsoft.Storage/storageAccounts/', variables('StorageAccName'))]",
-          "[resourceId('Microsoft.Network/networkInterfaces/', concat(variables('nicName'),copyIndex(1)))]"
-        ],
         "properties": {
           "hardwareProfile": {
             "vmSize": "[variables('vmSize')]"
@@ -203,12 +199,12 @@
               }
             ]
           },
-          "diagnosticsProfile": {
-            "bootDiagnostics": {
-              "enabled": true,
-              "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))).primaryEndpoints.blob]"
-            }
-          }
+          //"diagnosticsProfile": {
+            //"bootDiagnostics": {
+              //"enabled": true,
+              //"storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))).primaryEndpoints.blob]"
+            //}
+          //}
         },
         "copy": {
             "name": "VMCopy",

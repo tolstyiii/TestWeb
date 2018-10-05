@@ -1,0 +1,75 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageSKU": {
+            "Value": "Standard_LRS"
+        },
+        "location": {
+            "Value": "[resourceGroup().location]"
+        },
+        "StorageAccName": {
+            "Value": "storageacc"
+        },
+        "virtualNetworkName": {
+            "Value": "VNet"
+        },
+        "addressPrefix": {
+            "Value": "192.168.0.0/16"
+        },
+        "subnetName": {
+            "Value": "subNet"
+        },
+        "subnetPrefix": {
+            "Value": "192.168.1.0/24"
+        },
+        "secGroupName": {
+            "Value": "NSG"
+        },
+        "secGroupRuleName": {
+            "Value": "AccessToTestWeb"
+        },
+        "secGroupAddressPrefixIn": {
+            "Value": "86.57.255.88/29"
+        },
+        "LoadBalancerName": {
+            "Value": "LB"
+        },
+        "publicIPAddressName": {
+            "Value": "PublicIP"
+        },
+        "frontendIPConfigurationsName": {
+            "Value": "LBFrontEnd"
+        },
+        "backendAddressPoolsName": {
+            "Value": "LBBackEnd"
+        },
+        "probeName": {
+            "Value": "LoadBalancerProbe80"
+        },
+        "loadBalancingRulesName": {
+            "Value": "LoadBalancingRule80"
+        },
+        "inboundNatRulesName": {
+            "Value": "RDPVM"
+        },
+        "adminUsername": {
+            "Value": "sa"
+        },
+        "VMName": {
+            "Value": "Server"
+        },
+        "windowsOSVersion": {
+            "Value": "2016-Datacenter"
+        },
+        "vmSize": {
+            "Value": "Standard_A1"
+        },
+        "count": {
+            "Value": 2
+        },
+        "nicName": {
+            "Value": "NICServer"
+        }
+    }
+}

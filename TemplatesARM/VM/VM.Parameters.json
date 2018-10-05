@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adminUsername": {
+            "Value": "sa"
+        },
+        "VMName": {
+            "Value": "Server"
+        },
+        "windowsOSVersion": {
+            "Value": "2016-Datacenter"
+        },
+        "vmSize": {
+            "Value": "Standard_A1"
+        },
+        "count": {
+            "Value": 2
+        },
+        "nicName": {
+            "Value": "NICServer"
+        },
+        "location": {
+            "Value": "North Europe"
+        },
+        "publicIPAddressName": {
+            "Value": "PublicIP"
+        },
+        "virtualNetworkName": {
+            "Value": "VNet"
+        },
+        "LoadBalancerName": {
+            "Value": "LB"
+        },
+        "backendAddressPoolsName": {
+            "Value": "LBBackEnd"
+        },
+        "inboundNatRulesName": {
+            "Value": "RDPVM"
+        },
+        "subnetName": {
+            "Value": "subNet"
+        },
+        "StorageAccName": {
+            "Value": "storageacc"
+        }
+    }
+}
