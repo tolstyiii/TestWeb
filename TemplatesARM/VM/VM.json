@@ -202,14 +202,14 @@
                 "id": "[variables('networkInterfacesID')]"
               }
             ]
-          },
+          }
           /*"diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": true,
               "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccName'))).primaryEndpoints.blob]"
             }
-          }
-        },*/
+          }*/
+        },
         "copy": {
             "name": "VMCopy",
             "count": "[variables('count')]"
