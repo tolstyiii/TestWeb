@@ -28,10 +28,6 @@
     },
     "location": {
         "type": "string",
-        "allowedValues": [
-            "northeurope",
-            "eastasia"
-        ],
         "metadata": {
           "description": "Location for all resources."
         }

@@ -5,9 +5,6 @@
         "storageSKU": {
             "Value": "Standard_LRS"
         },
-        "location": {
-            "Value": "[resourceGroup().location]"
-        },
         "StorageAccName": {
             "Value": "storageacc"
         },
