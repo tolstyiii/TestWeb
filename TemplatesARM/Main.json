@@ -207,29 +207,6 @@
         },
         {
             "apiVersion": "2015-01-01",
-            "name": "nestedStorageAcc",
-            "type": "Microsoft.Resources/deployments",
-            "properties": {
-                "mode": "Incremental",
-                "templateLink": {
-                    "uri": "[variables('templateStorageAccLink')]",
-                    "contentVersion": "1.0.0.0"
-                },
-                "parameters": {
-                    "StorageAccName": {
-                        "value": "[parameters('StorageAccName')]"
-                    },
-                    "storageSKU": {
-                        "value": "[parameters('storageSKU')]"
-                    },
-                    "location": {
-                        "value": "[parameters('location')]"
-                    }
-                }
-            }
-        },
-        {
-            "apiVersion": "2015-01-01",
             "name": "nestedLoadBalancer",
             "type": "Microsoft.Resources/deployments",
             "properties": {
