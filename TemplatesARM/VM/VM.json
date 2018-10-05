@@ -166,7 +166,7 @@
         "name": "[concat(variables('vmName'),copyIndex(1))]",
         "location": "[variables('location')]",
         "dependsOn": [
-          "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
+          "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))]",
           "[resourceId('Microsoft.Network/networkInterfaces/', concat(variables('nicName'),copyIndex(1)))]"
         ],
         "properties": {
@@ -203,12 +203,12 @@
               }
             ]
           },
-          //"diagnosticsProfile": {
-            //"bootDiagnostics": {
-              //"enabled": true,
-              //"storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))).primaryEndpoints.blob]"
-            //}
-          //}
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true,
+              "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccName'))).primaryEndpoints.blob]"
+            }
+          }
         },
         "copy": {
             "name": "VMCopy",
