@@ -165,10 +165,10 @@
         "type": "Microsoft.Compute/virtualMachines",
         "name": "[concat(variables('vmName'),copyIndex(1))]",
         "location": "[variables('location')]",
-        /*"dependsOn": [
-          "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))]",
+        "dependsOn": [
+          //"[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))]",
           "[resourceId('Microsoft.Network/networkInterfaces/', concat(variables('nicName'),copyIndex(1)))]"
-        ],*/
+        ],
         "properties": {
           "hardwareProfile": {
             "vmSize": "[variables('vmSize')]"
