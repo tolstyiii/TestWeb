@@ -88,11 +88,14 @@
         },
         "IPAllocationMethodLB": {
             "type": "string",
-            "defaultValue": "Dynamic",
             "allowedValues": [
                 "Dynamic",
                 "Static"
-            ]
+            ],
+            "defaultValue": "Dynamic",
+            "metadata": {
+                "description": "Method allocation of public IP address for Load Balancer"
+            }
         },
         "publicIPAddressName": {
             "type": "string",

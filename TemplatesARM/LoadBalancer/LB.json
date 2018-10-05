@@ -18,6 +18,9 @@
         },
         "IPAllocationMethodLB": {
             "type": "string",
+            "metadata": {
+                "description": "Method allocation of public IP address for Load Balancer"
+            }
         },
         "publicIPAddressName": {
             "type": "string",
