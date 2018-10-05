@@ -4,89 +4,221 @@
     "parameters": {
         "adminUsername": {
             "type": "string",
-            "defaultValue": "sa",
             "metadata": {
               "description": "Username for the Virtual Machine."
             }
-          },
-          "adminPassword": {
-            "type": "securestring",
-            "metadata": {
-              "description": "Password for the Virtual Machine."
-            }
-          },
-          "windowsOSVersion": {
-            "type": "string",
-            "defaultValue": "2016-Datacenter",
-            "allowedValues": [
-              "2008-R2-SP1",
-              "2012-Datacenter",
-              "2012-R2-Datacenter",
-              "2016-Nano-Server",
-              "2016-Datacenter-with-Containers",
-              "2016-Datacenter"
-            ],
-            "metadata": {
-              "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
-            }
-          },
-          "location": {
-            "type": "string",
-            "defaultValue": "[resourceGroup().location]",
-            "metadata": {
-              "description": "Location for all resources."
-            }
-          },
-          "vmSize": {
-            "type": "string",
-            "allowedValues": [
-                "Basic_A1",
-                "Standard_A1",
-                "Standard_A1_v2",
-                "Standard_F1s",
-                "Standard_F1",
-                "Standard_B1ms",
-                "Standard_D1_v2",
-                "Standard_A2",
-                "Standard_D1",
-                "Standard_DS1",
-                "Basic_A2",
-                "Standard_DS1_v2",
-                "Standard_F2s_v2",
-                "Standard_A2_v2",
-                "Standard_B2s",
-                "Standard_F2s",
-                "Standard_F2"
-            ],
-            "defaultValue": "Standard_A1",
-            "metadata": {
-              "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
-            }
-          },
-          "IPAllocationMethod": {
-            "type": "string",
-            "defaultValue": "Dynamic",
-            "allowedValues": [
-                "Dynamic",
-                "Static"
-            ]
-          },
-          "count": {
-              "type": "int",
-              "defaultValue": 1,
-              "minValue": 1,
-              "maxValue": 5,
-              "metadata": {
-                  "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
-              }
+        },
+        "adminPassword": {
+          "type": "securestring",
+          "metadata": {
+            "description": "Password for the Virtual Machine."
           }
+        },
+        "VMName": {
+          "type": "string",
+          "metadata": {
+              "description": "Name of VM"
+          }
+        },
+        "windowsOSVersion": {
+          "type": "string",
+          "allowedValues": [
+            "2008-R2-SP1",
+            "2012-Datacenter",
+            "2012-R2-Datacenter",
+            "2016-Nano-Server",
+            "2016-Datacenter-with-Containers",
+            "2016-Datacenter"
+          ],
+          "metadata": {
+            "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+          }
+        },
+        "location": {
+          "type": "string",
+          "metadata": {
+            "description": "Location for all resources."
+          }
+        },
+        "vmSize": {
+          "type": "string",
+          "metadata": {
+            "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
+          }
+        },
+        "count": {
+            "type": "int",
+            "metadata": {
+                "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
+            }
+        },
+        "location": {
+          "type": "string",
+          "metadata": {
+            "description": "Location for all resources."
+          }
+        },
+        "publicIPAddressName": {
+          "type": "string",
+          "metadata": {
+              "description": "Name of resource Public IP Address"
+          }
+        },
+        "virtualNetworkName": {
+          "type": "string",
+          "metadata": {
+              "description": "Name for new virtual network"
+          }
+        },
+        "nicName": {
+          "type": "string",
+          "metadata": {
+              "description": "Name of Load Balancer backend AddressPools"
+          }
+        },
+        "LoadBalancerName": {
+          "type": "string",
+          "metadata": {
+              "description": "Name of Load Balancer"
+          }
+        },
+        "backendAddressPoolsName": {
+          "type": "string",
+          "metadata": {
+              "description": "Name of Load Balancer backend AddressPools"
+          }
+        },
+        "inboundNatRulesName": {
+          "type": "string",
+          "metadata": {
+              "description": "Name of Load Balancer Nat rules (RDP)"
+          }
+        },
+        "StorageAccName": {
+          "type": "string",
+          "metadata": {
+            "description": "The name for storage account."
+          }
+        },
+        "subnetName": {
+          "type": "string",
+          "metadata": {
+            "description": "Name for new virtual sunnet"
+          }
+        }
     },
     "variables": {
-        "nicName": "[concat(resourceGroup().Name, '-VMNic')]",
+        "subnetName": "[concat(resourceGroup().Name,'-',parameters('subnetName'))]",
+        "nicName": "[concat(resourceGroup().Name, '-', parameters('nicName'))]",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-        "vmName": "[concat(resourceGroup().Name, '-VM')]"
+        "vmName": "[concat(resourceGroup().Name,'-',parameters('VMName'))]",
+        "location": "[parameters('location')]",
+        "publicIPAddressName": "[parameters('publicIPAddressName')]",
+        "virtualNetworkName": "[parameters('virtualNetworkName')]",
+        "LoadBalancerName": "[parameters('LoadBalancerName')]",
+        "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LoadBalancerName'))]",
+        "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/',parameters('backendAddressPoolsName'))]",
+        "loadBalancerInboundNatRules": "[concat(variables('lbID'),'/inboundNatRules/',parameters('inboundNatRulesName')]",
+        "StorageAccName": "[parameters('StorageAccName')]",
+        "vmSize": "[parameters('vmSize')]",
+        "adminUsername": "[parameters('adminUsername')]",
+        "adminPassword": "[parameters('adminPassword')]",
+        "windowsOSVersion": "[parameters('windowsOSVersion')]",
+        "networkInterfacesID": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
     },
     "resources": [
-        
+      {
+        "apiVersion": "2016-03-30",
+        "type": "Microsoft.Network/networkInterfaces",
+        "name": "[concat(variables('nicName'),copyIndex(1))]",
+        "location": "[variables('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
+          "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+          "[resourceId('Microsoft.Network/loadBalancers/', variables('LoadBalancerName'))]"
+        ],
+        "properties": {
+          "ipConfigurations": [
+            {
+              "name": "[concat('ipconfig',copyIndex(1))]",
+              "properties": {
+                "privateIPAllocationMethod": "Dynamic",
+                "subnet": {
+                  "id": "[variables('subnetRef')]",
+                  "loadBalancerBackendAddressPools": [
+                    {
+                      "id": "[variables('lbPoolID')]"
+                    }
+                  ],
+                  "loadBalancerInboundNatRules": [
+                    {
+                      "id": "[concat(variables('loadBalancerInboundNatRules'), copyindex(1))]"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "copy": {
+            "name": "NICCopy",
+            "count": 2
+        }
+      },
+      {
+        "apiVersion": "2017-03-30",
+        "type": "Microsoft.Compute/virtualMachines",
+        "name": "[concat(variables('vmName'),copyIndex(1))]",
+        "location": "[variables('location')]",
+        "dependsOn": [
+          "[resourceId('Microsoft.Storage/storageAccounts/', variables('StorageAccName'))]",
+          "[resourceId('Microsoft.Network/networkInterfaces/', concat(variables('nicName'),copyIndex(1)))]"
+        ],
+        "properties": {
+          "hardwareProfile": {
+            "vmSize": "[variables('vmSize')]"
+          },
+          "osProfile": {
+            "computerName": "[variables('vmName')]",
+            "adminUsername": "[variables('adminUsername')]",
+            "adminPassword": "[variables('adminPassword')]"
+          },
+          "storageProfile": {
+            "imageReference": {
+              "publisher": "MicrosoftWindowsServer",
+              "offer": "WindowsServer",
+              "sku": "[variables('windowsOSVersion')]",
+              "version": "latest"
+            },
+            "osDisk": {
+              "createOption": "FromImage"
+            },
+            "dataDisks": [
+              {
+                "diskSizeGB": 100,
+                "lun": 0,
+                "createOption": "Empty"
+              }
+            ]
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "[variables('networkInterfacesID')]"
+              }
+            ]
+          },
+          "diagnosticsProfile": {
+            "bootDiagnostics": {
+              "enabled": true,
+              "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))).primaryEndpoints.blob]"
+            }
+          }
+        },
+        "copy": {
+            "name": "VMCopy",
+            "count": 2
+        }
+      }
     ]
 }

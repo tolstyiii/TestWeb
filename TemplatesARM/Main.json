@@ -127,13 +127,72 @@
             "metadata": {
                 "description": "Name of Load Balancer Nat rules (RDP)"
             }
-        }
+        },
+        "nicName": {
+            "type": "string",
+            "defaultValue": "NicServer",
+            "metadata": {
+                "description": "Name of Load Balancer backend AddressPools"
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "defaultValue": "sa",
+            "metadata": {
+              "description": "Username for the Virtual Machine."
+            }
+          },
+          "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+              "description": "Password for the Virtual Machine."
+            }
+          },
+          "VMName": {
+            "type": "string",
+            "defaultValue": "Server",
+            "metadata": {
+                "description": "Name of VM"
+            }
+          },
+          "windowsOSVersion": {
+            "type": "string",
+            "defaultValue": "2016-Datacenter",
+            "allowedValues": [
+              "2008-R2-SP1",
+              "2012-Datacenter",
+              "2012-R2-Datacenter",
+              "2016-Nano-Server",
+              "2016-Datacenter-with-Containers",
+              "2016-Datacenter"
+            ],
+            "metadata": {
+              "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+            }
+          },
+          "vmSize": {
+            "type": "string",
+            "defaultValue": "Standard_A1",
+            "metadata": {
+              "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
+            }
+          },
+          "count": {
+              "type": "int",
+              "defaultValue": 1,
+              "minValue": 1,
+              "maxValue": 5,
+              "metadata": {
+                  "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
+              }
+          }
       },
     "variables": {
-        "tempatesWholePartLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/",
-        "templateStorageAccLink": "[concat(variables('tempatesWholePartLink'),'StorageAcc/StorageAcc.json')]",
-        "TemplateNetworks": "[concat(variables('tempatesWholePartLink'),'Networks/Network.json')]",
-        "TemplateLB": "[concat(variables('tempatesWholePartLink'),'LoadBalancer/LB.json')]"
+        "templatesWholePartLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/",
+        "templateStorageAccLink": "[concat(variables('templatesWholePartLink'),'StorageAcc/StorageAcc.json')]",
+        "TemplateNetworks": "[concat(variables('templatesWholePartLink'),'Networks/Network.json')]",
+        "TemplateLB": "[concat(variables('templatesWholePartLink'),'LoadBalancer/LB.json')]",
+        "templateVM": "[concat(variables('templatesWholePartLink'),'VM/VM.json')]"
     },
     "resources": [
         {
@@ -231,6 +290,24 @@
                     }
                 }
             }    
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "nestedVM",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('templateVM')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+
+                }
+            }
         }
     ]
 }
