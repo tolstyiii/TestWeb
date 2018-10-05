@@ -128,64 +128,64 @@
                 "description": "Name of Load Balancer Nat rules (RDP)"
             }
         },
-        "nicName": {
-            "type": "string",
-            "defaultValue": "NicServer",
-            "metadata": {
-                "description": "Name of Load Balancer backend AddressPools"
-            }
-        },
         "adminUsername": {
             "type": "string",
             "defaultValue": "sa",
             "metadata": {
               "description": "Username for the Virtual Machine."
             }
-          },
-          "adminPassword": {
-            "type": "securestring",
-            "metadata": {
-              "description": "Password for the Virtual Machine."
-            }
-          },
-          "VMName": {
-            "type": "string",
-            "defaultValue": "Server",
-            "metadata": {
-                "description": "Name of VM"
-            }
-          },
-          "windowsOSVersion": {
-            "type": "string",
-            "defaultValue": "2016-Datacenter",
-            "allowedValues": [
-              "2008-R2-SP1",
-              "2012-Datacenter",
-              "2012-R2-Datacenter",
-              "2016-Nano-Server",
-              "2016-Datacenter-with-Containers",
-              "2016-Datacenter"
-            ],
-            "metadata": {
-              "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
-            }
-          },
-          "vmSize": {
-            "type": "string",
-            "defaultValue": "Standard_A1",
-            "metadata": {
-              "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
-            }
-          },
-          "count": {
-              "type": "int",
-              "defaultValue": 1,
-              "minValue": 1,
-              "maxValue": 5,
-              "metadata": {
-                  "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
-              }
+        },
+        "adminPassword": {
+          "type": "securestring",
+          "metadata": {
+            "description": "Password for the Virtual Machine."
           }
+        },
+        "VMName": {
+          "type": "string",
+          "defaultValue": "Server",
+          "metadata": {
+              "description": "Name of VM"
+          }
+        },
+        "windowsOSVersion": {
+          "type": "string",
+          "defaultValue": "2016-Datacenter",
+          "allowedValues": [
+            "2008-R2-SP1",
+            "2012-Datacenter",
+            "2012-R2-Datacenter",
+            "2016-Nano-Server",
+            "2016-Datacenter-with-Containers",
+            "2016-Datacenter"
+          ],
+          "metadata": {
+            "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+          }
+        },
+        "vmSize": {
+          "type": "string",
+          "defaultValue": "Standard_A1",
+          "metadata": {
+            "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
+          }
+        },
+        "count": {
+            "type": "int",
+            "defaultValue": "2",
+            "minValue": 1,
+            "maxValue": 5,
+            "metadata": {
+                "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
+            }
+        },
+        "nicName": {
+          "type": "string",
+          "defaultValue": "NICServer",
+          "metadata": {
+              "description": "Name of Load Balancer backend AddressPools"
+          }
+        }
       },
     "variables": {
         "templatesWholePartLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/",
@@ -302,10 +302,51 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
+                    "adminUsername": {
+                        "value": "[parameters('adminUsername')]"
+                    },
+                    "adminPassword": {
+                        "value": "[parameters('adminPassword')]"
+                    },
+                    "VMName": {
+                        "value": "[parameters('VMName')]"
+                    },
+                    "windowsOSVersion": {
+                        "value": "[parameters('windowsOSVersion')]"
+                    },
+                    "vmSize": {
+                        "value": "[parameters('vmSize')]"
+                    },
+                    "count": {
+                        "value": "[parameters('count')]"
+                    },
+                    "publicIPAddressName": {
+                        "value": "[parameters('publicIPAddressName')]"
+                    },
                     "location": {
                         "value": "[parameters('location')]"
                     },
-
+                    "virtualNetworkName": {
+                        "value": "[parameters('virtualNetworkName')]"
+                    },
+                    "nicName": {
+                        "value": "[parameters('nicName')]"
+                    },
+                    "LoadBalancerName": {
+                        "value": "[parameters('LoadBalancerName')]"
+                    },
+                    "backendAddressPoolsName": {
+                        "value": "[parameters('backendAddressPoolsName')]"
+                    },
+                    "inboundNatRulesName": {
+                        "value": "[parameters('inboundNatRulesName')]"
+                    },
+                    "StorageAccName": {
+                        "value": "[parameters('StorageAccName')]"
+                    },
+                    "subnetName": {
+                        "value": "[parameters('subnetName')]"
+                    }
                 }
             }
         }

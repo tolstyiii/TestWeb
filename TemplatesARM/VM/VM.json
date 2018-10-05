@@ -52,12 +52,6 @@
                 "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
             }
         },
-        "location": {
-          "type": "string",
-          "metadata": {
-            "description": "Location for all resources."
-          }
-        },
         "publicIPAddressName": {
           "type": "string",
           "metadata": {
@@ -118,13 +112,14 @@
         "LoadBalancerName": "[parameters('LoadBalancerName')]",
         "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LoadBalancerName'))]",
         "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/',parameters('backendAddressPoolsName'))]",
-        "loadBalancerInboundNatRules": "[concat(variables('lbID'),'/inboundNatRules/',parameters('inboundNatRulesName')]",
+        "loadBalancerInboundNatRules": "[concat(variables('lbID'),'/inboundNatRules/',parameters('inboundNatRulesName'))]",
         "StorageAccName": "[parameters('StorageAccName')]",
         "vmSize": "[parameters('vmSize')]",
         "adminUsername": "[parameters('adminUsername')]",
         "adminPassword": "[parameters('adminPassword')]",
         "windowsOSVersion": "[parameters('windowsOSVersion')]",
-        "networkInterfacesID": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+        "networkInterfacesID": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]",
+        "count": "[parameters('count')]"
     },
     "resources": [
       {
@@ -162,7 +157,7 @@
         },
         "copy": {
             "name": "NICCopy",
-            "count": 2
+            "count": "[variables('count')]"
         }
       },
       {
@@ -217,7 +212,7 @@
         },
         "copy": {
             "name": "VMCopy",
-            "count": 2
+            "count": "[variables('count')]"
         }
       }
     ]
