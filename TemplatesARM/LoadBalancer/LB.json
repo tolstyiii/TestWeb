@@ -18,10 +18,6 @@
         },
         "IPAllocationMethodLB": {
             "type": "string",
-            "allowedValues": [
-                "Dynamic",
-                "Static"
-            ]
         },
         "publicIPAddressName": {
             "type": "string",
