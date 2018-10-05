@@ -131,7 +131,7 @@
           "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
           "[concat('Microsoft.Network/loadBalancers/', variables('LoadBalancerName'))]"
         ],
-        "properties": {s
+        "properties": {
           "ipConfigurations": [
             {
               "name": "[concat('ipconfig',copyIndex(1))]",
