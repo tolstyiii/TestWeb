@@ -172,7 +172,7 @@
         },
         "count": {
             "type": "int",
-            "defaultValue": "2",
+            "defaultValue": 2,
             "minValue": 1,
             "maxValue": 5,
             "metadata": {
