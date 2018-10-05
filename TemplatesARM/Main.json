@@ -86,17 +86,6 @@
                 "description": "Name of Load Balancer"
             }
         },
-        "IPAllocationMethodLB": {
-            "type": "string",
-            "allowedValues": [
-                "Dynamic",
-                "Static"
-            ],
-            "defaultValue": "Dynamic",
-            "metadata": {
-                "description": "Method allocation of public IP address for Load Balancer"
-            }
-        },
         "publicIPAddressName": {
             "type": "string",
             "defaultValue": "PublicIP",
@@ -221,9 +210,6 @@
                 "parameters": {
                     "LoadBalancerName": {
                         "value": "LoadBalancerName"
-                    },
-                    "IPAllocationMethodLB": {
-                        "value": "IPAllocationMethodLB"
                     },
                     "publicIPAddressName": {
                         "value": "publicIPAddressName"

@@ -16,12 +16,6 @@
                 "description": "Name of Load Balancer"
             }
         },
-        "IPAllocationMethodLB": {
-            "type": "string",
-            "metadata": {
-                "description": "Method allocation of public IP address for Load Balancer"
-            }
-        },
         "publicIPAddressName": {
             "type": "string",
             "metadata": {
@@ -70,9 +64,8 @@
         "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/',parameters('backendAddressPoolsName'))]",
         "publicIPAddressID": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]",
         "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'))]",
-        "IPAllocationMethodLB": "[parameters('IPAllocationMethodLB')]",
         "probeName": "[parameters('probeName')]",
-        "loadBalancingRulesName": "[parameters('probeName')]",
+        "loadBalancingRulesName": "[parameters('loadBalancingRulesName')]",
         "inboundNatRulesName": "[parameters('inboundNatRulesName')]"
     },
     "resources": [
@@ -82,7 +75,7 @@
         "name": "[variables('publicIPAddressName')]",
         "location": "[variables('location')]",
         "properties": {
-          "publicIPAllocationMethod": "[variables('IPAllocationMethodLB')]"
+          "publicIPAllocationMethod": "Dynamic"
         }
       },
       {
