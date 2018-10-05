@@ -228,5 +228,43 @@
                 }
             }
         },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "nestedLoadBalancer",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('TemplateLB')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "LoadBalancerName": {
+                        "value": "LoadBalancerName"
+                    },
+                    "IPAllocationMethodLB": {
+                        "value": "IPAllocationMethodLB"
+                    },
+                    "publicIPAddressName": {
+                        "value": "publicIPAddressName"
+                    },
+                    "frontendIPConfigurationsName": {
+                        "value": "frontendIPConfigurationsName"
+                    },
+                    "backendAddressPoolsName": {
+                        "value": "backendAddressPoolsName"
+                    },
+                    "probeName": {
+                        "value": "probeName"
+                    },
+                    "loadBalancingRulesName": {
+                        "value": "loadBalancingRulesName"
+                    },
+                    "inboundNatRulesName": {
+                        "value": "inboundNatRulesName"
+                    }
+                }
+            }    
+        }
     ]
 }
