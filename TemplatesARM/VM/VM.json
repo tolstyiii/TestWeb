@@ -128,6 +128,7 @@
         "name": "[concat(variables('nicName'),copyIndex(1))]",
         "location": "[variables('location')]",
         "dependsOn": [
+          "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
           "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
           "[concat('Microsoft.Network/loadBalancers/', variables('LoadBalancerName'))]"
         ],
