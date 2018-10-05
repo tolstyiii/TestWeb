@@ -21,7 +21,7 @@
             "Value": "NICServer"
         },
         "location": {
-            "Value": "North Europe"
+            "Value": "northeurope"
         },
         "publicIPAddressName": {
             "Value": "PublicIP"
