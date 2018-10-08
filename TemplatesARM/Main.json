@@ -190,7 +190,9 @@
     "variables": {
         "templatesWholePartLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/",
         "templateStorageAccLink": "[concat(variables('templatesWholePartLink'),'StorageAcc/StorageAcc.json')]",
+        "templateStorageAccLinkName": "nestedStorageAcc",
         "TemplateNetworks": "[concat(variables('templatesWholePartLink'),'Networks/Network.json')]",
+        "TemplateNetworksName": "nestedNetworks",
         "TemplateLB": "[concat(variables('templatesWholePartLink'),'LoadBalancer/LB.json')]",
         "templateVM": "[concat(variables('templatesWholePartLink'),'VM/VM.json')]",
         "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'))]",
@@ -200,7 +202,7 @@
     "resources": [
         {
             "apiVersion": "2015-01-01",
-            "name": "nestedStorageAcc",
+            "name": "[variables('templateStorageAccLinkName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
@@ -223,7 +225,7 @@
         },
         {
             "apiVersion": "2015-01-01",
-            "name": "nestedNetworks",
+            "name": "[variables('TemplateNetworksName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
@@ -259,7 +261,7 @@
                 }
             }
         },
-        {
+        /*{
             "apiVersion": "2015-01-01",
             "name": "nestedLoadBalancer",
             "type": "Microsoft.Resources/deployments",
@@ -298,11 +300,6 @@
             "apiVersion": "2015-01-01",
             "name": "nestedVM",
             "type": "Microsoft.Resources/deployments",
-            /*"dependsOn": [
-                "[concat('Microsoft.Network/publicIPAddresses/',variables('publicIPAddressName'))]",
-                "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-                "[concat('Microsoft.Network/loadBalancers/', variables('LoadBalancerName'))]"
-            ],*/
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -357,6 +354,6 @@
                     }
                 }
             }
-        }
+        }*/
     ]
 }

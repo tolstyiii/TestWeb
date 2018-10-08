@@ -44,5 +44,11 @@
           },
           "name": "[variables('StorageAccName')]"
         }
-      ]
+      ],
+      "outputs": {
+        "StorageAccName": {
+          "type": "object",
+          "value": "[reference(resourceid('Microsoft.Storage/storageAccounts',variables('StorageAccName')))]"
+        }
+      }
 }

@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualNetworkName": {
+            "Value": "VNet"
+        },
+        "addressPrefix": {
+            "Value": "192.168.0.0/16"
+        },
+        "subnetName": {
+            "Value": "subNet"
+        },
+        "subnetPrefix": {
+            "Value": "192.168.1.0/24"
+        },
+        "secGroupName": {
+            "Value": "NSG"
+        },
+        "secGroupRuleName": {
+            "Value": "AccessToTestWeb"
+        },
+        "secGroupAddressPrefixIn": {
+            "Value": "86.57.255.88/29"
+        }
+    }
+}

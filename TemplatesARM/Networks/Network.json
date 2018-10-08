@@ -114,5 +114,11 @@
         ]
       }
     }
-  ]
-}
+  ],
+  "outputs": {
+    "VNet":{
+      "type": "object",
+      "value": "[reference(resourceId('Microsoft.Network/networkSecurityGroups', variables('secGroupName')))]"
+    }
+  }
+} 
