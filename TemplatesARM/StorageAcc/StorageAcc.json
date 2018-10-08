@@ -17,6 +17,7 @@
         },
         "location": {
             "type": "string",
+            "defaultValue": "[resourceGroup().location]",
             "metadata": {
               "description": "Location for all resources."
             }
@@ -45,10 +46,10 @@
           "name": "[variables('StorageAccName')]"
         }
       ],
-      "outputs": {
-        "StorageAccName": {
-          "type": "object",
-          "value": "[reference(resourceid('Microsoft.Storage/storageAccounts',variables('StorageAccName')))]"
-        }
+    "outputs": {
+      "StorageAccID":{
+        "type": "string",
+        "value": "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))]"
       }
+    }
 }

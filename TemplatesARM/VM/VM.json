@@ -53,12 +53,6 @@
                 "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
             }
         },
-        "publicIPAddressName": {
-          "type": "string",
-          "metadata": {
-              "description": "Name of resource Public IP Address"
-          }
-        },
         "virtualNetworkName": {
           "type": "string",
           "metadata": {
@@ -108,7 +102,6 @@
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
         "vmName": "[concat(resourceGroup().Name,'-',parameters('VMName'))]",
         "location": "[parameters('location')]",
-        "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'))]",
         "virtualNetworkName": "[concat(resourceGroup().name,'-',parameters('virtualNetworkName'))]",
         "LoadBalancerName": "[parameters('LoadBalancerName')]",
         "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LoadBalancerName'))]",
@@ -128,11 +121,6 @@
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[concat(variables('nicName'),copyIndex(1))]",
         "location": "[variables('location')]",
-        /*"dependsOn": [
-          "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
-          "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
-          "[concat('Microsoft.Network/loadBalancers/', variables('LoadBalancerName'))]"
-        ],*/
         "properties": {
           "ipConfigurations": [
             {
@@ -167,7 +155,6 @@
         "name": "[concat(variables('vmName'),copyIndex(1))]",
         "location": "[variables('location')]",
         "dependsOn": [
-          //"[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName'))]",
           "[resourceId('Microsoft.Network/networkInterfaces/',concat(variables('nicName'),copyIndex(1)))]"
         ],
         "properties": {

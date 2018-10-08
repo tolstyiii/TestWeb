@@ -194,10 +194,9 @@
         "TemplateNetworks": "[concat(variables('templatesWholePartLink'),'Networks/Network.json')]",
         "TemplateNetworksName": "nestedNetworks",
         "TemplateLB": "[concat(variables('templatesWholePartLink'),'LoadBalancer/LB.json')]",
+        "TemplateLBName": "nestedLoadBalancer",
         "templateVM": "[concat(variables('templatesWholePartLink'),'VM/VM.json')]",
-        "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'))]",
-        "virtualNetworkName": "[parameters('virtualNetworkName')]",
-        "LoadBalancerName": "[parameters('LoadBalancerName')]"
+        "templateVMName": "nestedVM"
     },
     "resources": [
         {
@@ -261,10 +260,13 @@
                 }
             }
         },
-        /*{
+        {
             "apiVersion": "2015-01-01",
-            "name": "nestedLoadBalancer",
+            "name": "[variables('TemplateLBName')]",
             "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[variables('TemplateNetworksName')]"
+            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -298,8 +300,12 @@
         },
         {
             "apiVersion": "2015-01-01",
-            "name": "nestedVM",
+            "name": "[variables('templateVMName')]",
             "type": "Microsoft.Resources/deployments",
+            "dependsOn": [
+                "[variables('TemplateLBName')]",
+                "[variables('templateStorageAccLinkName')]"
+            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -354,6 +360,6 @@
                     }
                 }
             }
-        }*/
+        }
     ]
 }
