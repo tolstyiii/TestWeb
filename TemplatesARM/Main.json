@@ -185,6 +185,13 @@
           "metadata": {
               "description": "Name of Load Balancer backend AddressPools"
           }
+        },
+        "availabilitySetName": {
+            "type": "string",
+            "defaultValue": "AvSetName",
+            "metadata": {
+                "description": "Name of availability set"
+            }
         }
       },
     "variables": {
@@ -354,6 +361,9 @@
                     },
                     "subnetName": {
                         "value": "[parameters('subnetName')]"
+                    },
+                    "availabilitySetName": {
+                        "value": "[parameters('availabilitySetName')]"
                     }
                 }
             }
