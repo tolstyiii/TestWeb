@@ -83,12 +83,6 @@
               "description": "Name of Load Balancer Nat rules (RDP)"
           }
         },
-        "StorageAccName": {
-          "type": "string",
-          "metadata": {
-            "description": "The name for storage account."
-          }
-        },
         "subnetName": {
           "type": "string",
           "metadata": {
@@ -107,7 +101,6 @@
         "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LoadBalancerName'))]",
         "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/',parameters('backendAddressPoolsName'))]",
         "loadBalancerInboundNatRules": "[concat(variables('lbID'),'/inboundNatRules/',parameters('inboundNatRulesName'))]",
-        "StorageAccName": "[concat(resourceGroup().Name,parameters('StorageAccName'))]",
         "vmSize": "[parameters('vmSize')]",
         "adminUsername": "[parameters('adminUsername')]",
         "adminPassword": "[parameters('adminPassword')]",

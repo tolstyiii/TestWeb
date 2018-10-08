@@ -331,9 +331,6 @@
                     "count": {
                         "value": "[parameters('count')]"
                     },
-                    "publicIPAddressName": {
-                        "value": "[parameters('publicIPAddressName')]"
-                    },
                     "location": {
                         "value": "[parameters('location')]"
                     },
