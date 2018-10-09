@@ -282,25 +282,25 @@
                 },
                 "parameters": {
                     "LoadBalancerName": {
-                        "value": "LoadBalancerName"
+                        "value": "[parameters('LoadBalancerName')]"
                     },
                     "publicIPAddressName": {
-                        "value": "publicIPAddressName"
+                        "value": "[parameters('publicIPAddressName')]"
                     },
                     "frontendIPConfigurationsName": {
-                        "value": "frontendIPConfigurationsName"
+                        "value": "[parameters('frontendIPConfigurationsName')]"
                     },
                     "backendAddressPoolsName": {
-                        "value": "backendAddressPoolsName"
+                        "value": "[parameters('backendAddressPoolsName')]"
                     },
                     "probeName": {
-                        "value": "probeName"
+                        "value": "[parameters('probeName')]"
                     },
                     "loadBalancingRulesName": {
-                        "value": "loadBalancingRulesName"
+                        "value": "[parameters('loadBalancingRulesName')]"
                     },
                     "inboundNatRulesName": {
-                        "value": "inboundNatRulesName"
+                        "value": "[parameters('inboundNatRulesName')]"
                     }
                 }
             }    
