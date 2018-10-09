@@ -94,9 +94,16 @@
           "metadata": {
             "description": "The name for storage account."
           }
+        },
+        "availabilitySetName": {
+          "type": "string",
+          "metadata": {
+            "description": "The name for availability set."
+          }
         }
     },
     "variables": {
+        "availabilitySetName": "[concat(resourceGroup().name,parameters('availabilitySetName'))]",
         "subnetName": "[concat(resourceGroup().Name,'-',parameters('subnetName'))]",
         "nicName": "[concat(resourceGroup().Name, '-', parameters('nicName'))]",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
@@ -116,6 +123,17 @@
         "storageAccName": "[concat(resourceGroup().name,parameters('storageAccName'))]"
     },
     "resources": [
+      {
+        "type": "Microsoft.Compute/availabilitySets",
+        "name": "[variables('availabilitySetName')]",
+        "apiVersion": "2016-04-30-preview",
+        "location": "[variables('location')]",
+        "properties": {
+          "platformFaultDomainCount": 2,
+          "platformUpdateDomainCount": 2,
+          "managed": true
+        }
+      },
       {
         "apiVersion": "2016-03-30",
         "type": "Microsoft.Network/networkInterfaces",
@@ -158,6 +176,9 @@
           "[resourceId('Microsoft.Network/networkInterfaces/',concat(variables('nicName'),copyIndex(1)))]"
         ],
         "properties": {
+          "availabilitySet": {
+            "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
+          },
           "hardwareProfile": {
             "vmSize": "[variables('vmSize')]"
           },
