@@ -110,7 +110,7 @@
         "vmName": "[concat(resourceGroup().Name,'-',parameters('VMName'))]",
         "location": "[parameters('location')]",
         "virtualNetworkName": "[concat(resourceGroup().name,'-',parameters('virtualNetworkName'))]",
-        "LoadBalancerName": "[parameters('LoadBalancerName')]",
+        "LoadBalancerName": "[concat(resourceGroup().Name,'-',parameters('LoadBalancerName')]",
         "lbID": "[resourceId('Microsoft.Network/loadBalancers',variables('LoadBalancerName'))]",
         "lbPoolID": "[concat(variables('lbID'),'/backendAddressPools/',parameters('backendAddressPoolsName'))]",
         "loadBalancerInboundNatRules": "[concat(variables('lbID'),'/inboundNatRules/',parameters('inboundNatRulesName'))]",
