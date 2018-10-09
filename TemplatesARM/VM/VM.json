@@ -176,7 +176,8 @@
         "name": "[concat(variables('vmName'),copyIndex(1))]",
         "location": "[variables('location')]",
         "dependsOn": [
-          "[resourceId('Microsoft.Network/networkInterfaces/',concat(variables('nicName'),copyIndex(1)))]"
+          "[resourceId('Microsoft.Network/networkInterfaces/',concat(variables('nicName'),copyIndex(1)))]",
+          "[variables('availabilitySetName')]"
         ],
         "properties": {
           "availabilitySet": {
