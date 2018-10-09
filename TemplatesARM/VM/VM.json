@@ -94,16 +94,9 @@
           "metadata": {
             "description": "The name for storage account."
           }
-        },
-        "availabilitySetName": {
-          "type": "string",
-          "metadata": {
-            "description": "Name of availability set"
-          }
         }
     },
     "variables": {
-        "availabilitySetName": "[concat(resourceGroup().name,'-',parameters('availabilitySetName'))]",
         "subnetName": "[concat(resourceGroup().Name,'-',parameters('subnetName'))]",
         "nicName": "[concat(resourceGroup().Name, '-', parameters('nicName'))]",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
@@ -210,11 +203,5 @@
             "count": "[variables('count')]"
         }
       }
-    ],
-    "outputs": {
-      "BackendPool": {
-        "type": "string",
-        "value": "[variables('lbPoolID')]"
-      }
-    }
+    ]
 }
