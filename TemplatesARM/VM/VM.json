@@ -128,6 +128,9 @@
         "name": "[variables('availabilitySetName')]",
         "apiVersion": "2017-03-30",
         "location": "[variables('location')]",
+        "sku": {
+          "name": "Aligned"
+        },
         "properties": {
           "platformFaultDomainCount": 2,
           "platformUpdateDomainCount": 2,
