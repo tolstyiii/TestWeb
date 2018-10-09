@@ -42,7 +42,7 @@
             "Value": "storageacc"
         },
         "availabilitySetName": {
-            "Value": "AvSetName"
+            "Value": "AvSet"
         }
     }
 }

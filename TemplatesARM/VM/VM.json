@@ -126,7 +126,7 @@
       {
         "type": "Microsoft.Compute/availabilitySets",
         "name": "[variables('availabilitySetName')]",
-        "apiVersion": "2016-04-30-preview",
+        "apiVersion": "2017-03-30",
         "location": "[variables('location')]",
         "properties": {
           "platformFaultDomainCount": 2,
@@ -146,7 +146,7 @@
               "properties": {
                 "privateIPAllocationMethod": "Dynamic",
                 "subnet": {
-                  "id": "[variables('subnetRef')]",
+                  "id": "[variables('subnetRef')]"
                   },
                 "loadBalancerBackendAddressPools": [
                   {
@@ -211,13 +211,13 @@
                 "id": "[concat(variables('networkInterfacesID'),copyIndex(1))]"
               }
             ]
-          }
-          /*"diagnosticsProfile": {
+          },
+          "diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": true,
-              "storageUri": "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName')).primaryEndpoints.blob]"
+              "storageUri": "[concat('http://',variables('storageAccName'),'.blob.core.windows.net')]"
             }
-          }*/
+          }
         },
         "copy": {
             "name": "VMCopy",

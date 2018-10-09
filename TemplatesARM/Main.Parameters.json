@@ -69,7 +69,7 @@
             "Value": "NICServer"
         },
         "availabilitySetName": {
-            "Value": "AvSetName"
+            "Value": "AvSet"
         }
     }
 }
