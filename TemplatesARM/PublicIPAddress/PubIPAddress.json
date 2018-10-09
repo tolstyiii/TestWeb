@@ -1,0 +1,45 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "publicIPAddressName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of resource Public IP Address"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+              "description": "Location for all resources."
+            }
+        },
+        "count": {
+            "type": "int",
+            "metadata": {
+                "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
+            }
+        }
+    },
+    "variables": {
+        "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'))]",
+        "count": "[parameters('count')]",
+        "location": "[parameters('location')]"
+    },
+    "resources": [
+        {
+            "apiVersion": "2016-03-30",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "[concat(variables('publicIPAddressName'),copyIndex(1))]",
+            "location": "[variables('location')]",
+            "properties": {
+              "publicIPAllocationMethod": "Dynamic"
+            },
+            "copy": {
+                "name": "PublicIPCreating",
+                "count": "[variables('count')]"
+            }
+        }
+    ]
+}
