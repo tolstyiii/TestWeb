@@ -104,6 +104,7 @@
     },
     "variables": {
         "availabilitySetName": "[concat(resourceGroup().name,parameters('availabilitySetName'))]",
+        "availabilitySetID": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]",
         "subnetName": "[concat(resourceGroup().Name,'-',parameters('subnetName'))]",
         "nicName": "[concat(resourceGroup().Name, '-', parameters('nicName'))]",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
@@ -180,7 +181,7 @@
         ],
         "properties": {
           "availabilitySet": {
-            "id": "[resourceId('Microsoft.Compute/availabilitySets',variables('availabilitySetName'))]"
+            "id": "[variables('availabilitySetID')]"
           },
           "hardwareProfile": {
             "vmSize": "[variables('vmSize')]"
