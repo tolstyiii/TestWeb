@@ -138,14 +138,14 @@
             {
                 "name": "[concat(variables('inboundNatRulesName'),'1')]",
                 "properties": {
-                "frontendIPConfiguration": {
-                    "id": "[variables('frontEndIPConfigID')]"
-                },
-                "protocol": "Tcp",
-                "frontendPort": 33891,
-                "backendPort": 3389,
-                "enableFloatingIP": false
-                }              
+                    "frontendIPConfiguration": {
+                        "id": "[variables('frontEndIPConfigID')]"
+                    },
+                    "protocol": "Tcp",
+                    "frontendPort": 33891,
+                    "backendPort": 3389,
+                    "enableFloatingIP": false
+                    }              
               },
             {
                 "name": "[concat(variables('inboundNatRulesName'),'2')]",
