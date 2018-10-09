@@ -124,16 +124,6 @@
     },
     "resources": [
       {
-        "type": "Microsoft.Compute/availabilitySets",
-        "name": "[variables('availabilitySetName')]",
-        "apiVersion": "2017-03-30",
-        "location": "[variables('location')]",
-        "properties": {
-          "platformFaultDomainCount": 2,
-          "platformUpdateDomainCount": 2
-        }
-      },
-      {
         "apiVersion": "2016-03-30",
         "type": "Microsoft.Network/networkInterfaces",
         "name": "[concat(variables('nicName'),copyIndex(1))]",
@@ -192,14 +182,14 @@
             },
             "osDisk": {
               "createOption": "FromImage"
-            },
-            "dataDisks": [
+            }
+            /*"dataDisks": [
               {
                 "diskSizeGB": 100,
                 "lun": 0,
                 "createOption": "Empty"
               }
-            ]
+            ]*/
           },
           "networkProfile": {
             "networkInterfaces": [
