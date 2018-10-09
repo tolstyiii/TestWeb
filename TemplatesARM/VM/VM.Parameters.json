@@ -23,9 +23,6 @@
         "location": {
             "Value": "northeurope"
         },
-        "publicIPAddressName": {
-            "Value": "PublicIP"
-        },
         "virtualNetworkName": {
             "Value": "VNet"
         },
@@ -43,6 +40,9 @@
         },
         "StorageAccName": {
             "Value": "storageacc"
+        },
+        "availabilitySetName": {
+            "Value": "AvSetName"
         }
     }
 }

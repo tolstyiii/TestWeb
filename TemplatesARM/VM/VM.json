@@ -103,7 +103,7 @@
         }
     },
     "variables": {
-        "availabilitySetName": "[concat(resourceGroup().name,'-',parameters('availabilitySetName')",
+        "availabilitySetName": "[concat(resourceGroup().name,'-',parameters('availabilitySetName'))]",
         "subnetName": "[concat(resourceGroup().Name,'-',parameters('subnetName'))]",
         "nicName": "[concat(resourceGroup().Name, '-', parameters('nicName'))]",
         "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
@@ -126,12 +126,11 @@
       {
         "type": "Microsoft.Compute/availabilitySets",
         "name": "[variables('availabilitySetName')]",
-        "apiVersion": "2016-04-30-preview",
+        "apiVersion": "2017-03-30",
         "location": "[variables('location')]",
         "properties": {
           "platformFaultDomainCount": 2,
-          "platformUpdateDomainCount": 2,
-          "managed": true
+          "platformUpdateDomainCount": 2
         }
       },
       {
@@ -208,13 +207,13 @@
                 "id": "[concat(variables('networkInterfacesID'),copyIndex(1))]"
               }
             ]
-          },
-          "diagnosticsProfile": {
+          }
+          /*"diagnosticsProfile": {
             "bootDiagnostics": {
               "enabled": true,
               "storageUri": "[resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccName')).primaryEndpoints.blob]"
             }
-          }
+          }*/
         },
         "copy": {
             "name": "VMCopy",
