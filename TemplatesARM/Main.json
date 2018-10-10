@@ -113,6 +113,8 @@
         "templateStorageAccName": "nestedStorageAcc",
         "templatePubIPAddress": "[concat(variables('templatesWholePartLink'),'PublicIPAddress/PubIPAddress.json')]",
         "templatePubIPAddressName": "nestedPubIPAddress",
+        "templateNSG": "[concat(variables('templatesWholePartLink'),'NSG/NSG.json')]",
+        "templateNSGName": "nestedNSG",
         "TemplateNetworks": "[concat(variables('templatesWholePartLink'),'Networks/Network.json')]",
         "TemplateNetworksName": "nestedNetworks",
         "TemplateLB": "[concat(variables('templatesWholePartLink'),'LoadBalancer/LB.json')]",
@@ -137,6 +139,35 @@
                     },
                     "storageSKU": {
                         "value": "[parameters('storageSKU')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('templateNSGName')]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('templateNSG')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "subnetPrefix": {
+                        "value": "[parameters('subnetPrefix')]"
+                    },
+                    "secGroupName": {
+                        "value": "[parameters('secGroupName')]"
+                    },
+                    "secGroupAddressPrefixIn": {
+                        "value": "[parameters('secGroupAddressPrefixIn')]"
+                    },
+                    "secGroupRuleName": {
+                        "value": "[parameters('secGroupRuleName')]"
                     },
                     "location": {
                         "value": "[parameters('location')]"
@@ -247,7 +278,8 @@
             "type": "Microsoft.Resources/deployments",
             "dependsOn": [
                 "[variables('TemplateLBName')]",
-                "[variables('templateStorageAccName')]"
+                "[variables('templateStorageAccName')]",
+                "[variables('templateNSGName')]"
             ],
             "properties": {
                 "mode": "Incremental",

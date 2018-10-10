@@ -31,18 +31,6 @@
             "metadata": {
               "description": "Name for network security group"
             }
-        },
-        "secGroupRuleName": {
-            "Value": "AccessToTestWeb",
-            "metadata": {
-              "description": "Name of rule for access to network security group"
-            }
-        },
-        "secGroupAddressPrefixIn": {
-            "Value": "86.57.255.88/29",
-            "metadata": {
-              "description": "Prefix for network for access to security group"
-            }
         }
     }
 }

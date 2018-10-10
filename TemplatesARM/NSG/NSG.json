@@ -1,0 +1,58 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "string",
+            "defaultValue": "[resourceGroup().location]",
+            "metadata": {
+              "description": "Location for all resources."
+            }
+        },
+        "subnetPrefix": {
+            "type": "string"
+        },
+        "secGroupName": {
+            "type": "string"
+        },
+        "secGroupRuleName": {
+            "type": "string"
+        },
+        "secGroupAddressPrefixIn": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "location": "[parameters('location')]",
+        "subnetPrefix": "[parameters('subnetPrefix')]",
+        "secGroupName": "[concat(resourceGroup().Name,'-',parameters('secGroupName'))]",
+        "secGroupRuleName": "[parameters('secGroupRuleName')]",
+        "secGroupAddressPrefixIn": "[parameters('secGroupAddressPrefixIn')]"
+    },
+    "resources": [
+        {
+          "name": "[variables('secGroupName')]",
+          "type": "Microsoft.Network/networkSecurityGroups",
+          "apiVersion": "2017-06-01",
+          "location": "[variables('location')]",
+          "properties": {
+            "securityRules": [
+              {
+                "properties": {
+                  "description": "[variables('secGroupRuleName')]",
+                  "protocol": "Tcp",
+                  "destinationPortRange": "3389",
+                  "destinationAddressPrefix": "[variables('subnetPrefix')]",
+                  "sourceAddressPrefix": "[variables('secGroupAddressPrefixIn')]",
+                  "sourcePortRange": "*",
+                  "access": "Allow",
+                  "priority": 100,
+                  "direction": "Inbound"
+                },
+                "name": "[variables('secGroupRuleName')]"
+              }
+            ]
+          }
+        }
+    ]
+}

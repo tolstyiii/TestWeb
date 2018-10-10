@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subnetPrefix": {
+            "Value": "192.168.1.0/24",
+            "metadata": {
+              "description": "Prefix for new virtual subnet"
+            }
+        },
+        "secGroupName": {
+            "Value": "NSG",
+            "metadata": {
+              "description": "Name for network security group"
+            }
+        },
+        "secGroupRuleName": {
+            "Value": "AccessToTestWeb",
+            "metadata": {
+              "description": "Name of rule for access to network security group"
+            }
+        },
+        "secGroupAddressPrefixIn": {
+            "Value": "86.57.255.88/29",
+            "metadata": {
+              "description": "Prefix for network for access to security group"
+            }
+        }
+    }
+}
