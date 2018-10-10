@@ -223,12 +223,6 @@
                     },
                     "secGroupName": {
                         "value": "[parameters('secGroupName')]"
-                    },
-                    "secGroupRuleName": {
-                        "value": "[parameters('secGroupRuleName')]"
-                    },
-                    "secGroupAddressPrefixIn": {
-                        "value": "[parameters('secGroupAddressPrefixIn')]"
                     }
                 }
             }
