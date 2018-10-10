@@ -140,7 +140,7 @@
         "count": {
             "Value": 2,
             "minValue": 1,
-            "maxValue": 5,
+            "maxValue": 10,
             "metadata": {
                 "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
             }
