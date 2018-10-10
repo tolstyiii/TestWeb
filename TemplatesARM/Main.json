@@ -198,6 +198,9 @@
         {
             "apiVersion": "2015-01-01",
             "name": "[variables('TemplateNetworksName')]",
+            "dependsOn": [
+                "[variables('templateNSGName')]"
+            ],
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
