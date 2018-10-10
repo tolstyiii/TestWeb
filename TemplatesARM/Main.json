@@ -160,9 +160,6 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
-                    },
-                    "count": {
-                        "value": "[parameters('count')]"
                     }
                 }
             }
