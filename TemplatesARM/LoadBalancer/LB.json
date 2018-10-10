@@ -48,22 +48,10 @@
     },
     "resources": [
       {
-        "apiVersion": "2016-03-30",
-        "type": "Microsoft.Network/publicIPAddresses",
-        "name": "[variables('publicIPAddressName')]",
-        "location": "[variables('location')]",
-        "properties": {
-          "publicIPAllocationMethod": "Dynamic"
-        }
-      },
-      {
         "name": "[variables('LoadBalancerName')]",
         "type": "Microsoft.Network/loadBalancers",
         "apiVersion": "2018-08-01",
         "location": "[variables('location')]",
-        "dependsOn": [
-            "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]"
-        ],
         "properties": {
             "frontendIPConfigurations": [
             {
