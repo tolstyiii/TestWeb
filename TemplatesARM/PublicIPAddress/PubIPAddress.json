@@ -14,31 +14,20 @@
             "metadata": {
               "description": "Location for all resources."
             }
-        },
-        "count": {
-            "type": "int",
-            "metadata": {
-                "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
-            }
         }
     },
     "variables": {
         "publicIPAddressName": "[concat(resourceGroup().Name, '-',parameters('publicIPAddressName'))]",
-        "count": "[parameters('count')]",
         "location": "[parameters('location')]"
     },
     "resources": [
         {
             "apiVersion": "2016-03-30",
             "type": "Microsoft.Network/publicIPAddresses",
-            "name": "[concat(variables('publicIPAddressName'),copyIndex(1))]",
+            "name": "[variables('publicIPAddressName')]",
             "location": "[variables('location')]",
             "properties": {
               "publicIPAllocationMethod": "Dynamic"
-            },
-            "copy": {
-                "name": "PublicIPCreating",
-                "count": "[variables('count')]"
             }
         }
     ]
