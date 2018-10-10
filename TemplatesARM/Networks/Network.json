@@ -31,7 +31,7 @@
       "virtualNetworkName": "[concat(resourceGroup().Name,'-',parameters('virtualNetworkName'))]",
       "subnetName": "[concat(resourceGroup().Name,'-',parameters('subnetName'))]",
       "subnetPrefix": "[parameters('subnetPrefix')]",
-      "secGroupName": "[concat(resourceGroup().Name,'-',parameters('secGroupName'))]",
+      "secGroupName": "[concat(resourceGroup().Name,'-',parameters('secGroupName'))]"
   },
   "resources": [
     {
