@@ -3,25 +3,46 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "LoadBalancerName": {
-            "Value": "LB"
+            "Value": "LB",
+            "metadata": {
+                "description": "Name of Load Balancer"
+            }
         },
         "publicIPAddressName": {
-            "Value": "PublicIP"
+            "Value": "PublicIP",
+            "metadata": {
+                "description": "Name of resource Public IP Address"
+            }
         },
         "frontendIPConfigurationsName": {
-            "Value": "LBFrontEnd"
+            "Value": "LBFrontEnd",
+            "metadata": {
+                "description": "Name of Load Balancer frontend IPConfigurations"
+            }
         },
         "backendAddressPoolsName": {
-            "Value": "LBBackEnd"
+            "Value": "LBBackEnd",
+            "metadata": {
+                "description": "Name of Load Balancer backend AddressPools"
+            }
         },
         "probeName": {
-            "Value": "LoadBalancerProbe80"
+            "Value": "LoadBalancerProbe80",
+            "metadata": {
+                "description": "Name of Load Balancer probe"
+            }
         },
         "loadBalancingRulesName": {
-            "Value": "LoadBalancingRule80"
+            "Value": "LoadBalancingRule80",
+            "metadata": {
+                "description": "Name of Load Balancing rule"
+            }
         },
         "inboundNatRulesName": {
-            "Value": "RDPVM"
+            "Value": "RDPVM",
+            "metadata": {
+                "description": "Name of Load Balancer Nat rules (RDP)"
+            }
         }
     }
 }

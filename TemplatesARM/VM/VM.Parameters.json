@@ -3,46 +3,90 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "adminUsername": {
-            "Value": "sa"
+            "Value": "sa",
+            "metadata": {
+              "description": "Username for the Virtual Machine."
+            }
         },
         "VMName": {
-            "Value": "Server"
+            "Value": "Server",
+            "metadata": {
+                "description": "Name of VM"
+            }
         },
         "windowsOSVersion": {
-            "Value": "2016-Datacenter"
+            "Value": "2016-Datacenter",
+            "allowedValues": [
+              "2008-R2-SP1",
+              "2012-Datacenter",
+              "2012-R2-Datacenter",
+              "2016-Nano-Server",
+              "2016-Datacenter-with-Containers",
+              "2016-Datacenter"
+            ],
+            "metadata": {
+              "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+            }
         },
         "vmSize": {
-            "Value": "Standard_A1"
+            "Value": "Standard_A1",
+            "metadata": {
+              "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
+            }
         },
         "count": {
-            "Value": 2
+            "Value": 2,
+            "metadata": {
+                "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
+            }
         },
         "nicName": {
-            "Value": "NICServer"
-        },
-        "location": {
-            "Value": "northeurope"
+            "Value": "NICServer",
+            "metadata": {
+                "description": "Name of Load Balancer backend AddressPools"
+            }
         },
         "virtualNetworkName": {
-            "Value": "VNet"
+            "Value": "VNet",
+            "metadata": {
+                "description": "Name for new virtual network"
+            }
         },
         "LoadBalancerName": {
-            "Value": "LB"
+            "Value": "LB",
+            "metadata": {
+                "description": "Name of Load Balancer"
+            }
         },
         "backendAddressPoolsName": {
-            "Value": "LBBackEnd"
+            "Value": "LBBackEnd",
+            "metadata": {
+                "description": "Name of Load Balancer backend AddressPools"
+            }
         },
         "inboundNatRulesName": {
-            "Value": "RDPVM"
+            "Value": "RDPVM",
+            "metadata": {
+                "description": "Name of Load Balancer Nat rules (RDP)"
+            }
         },
         "subnetName": {
-            "Value": "subNet"
+            "Value": "subNet",
+            "metadata": {
+              "description": "Name for new virtual sunnet"
+            }
         },
         "StorageAccName": {
-            "Value": "storageacc"
+            "Value": "storageacc",
+            "metadata": {
+              "description": "The name for storage account."
+            }
         },
         "availabilitySetName": {
-            "Value": "AvSet"
+            "Value": "AvSet",
+            "metadata": {
+              "description": "The name for availability set."
+            }
         }
     }
 }

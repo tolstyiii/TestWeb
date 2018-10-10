@@ -3,25 +3,46 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "virtualNetworkName": {
-            "Value": "VNet"
+            "Value": "VNet",
+            "metadata": {
+              "description": "Name for new virtual network"
+            }
         },
         "addressPrefix": {
-            "Value": "192.168.0.0/16"
+            "Value": "192.168.0.0/16",
+            "metadata": {
+              "description": "Prefix for new virtual network"
+            }
         },
         "subnetName": {
-            "Value": "subNet"
+            "Value": "subNet",
+            "metadata": {
+              "description": "Name for new virtual sunnet"
+            }
         },
         "subnetPrefix": {
-            "Value": "192.168.1.0/24"
+            "Value": "192.168.1.0/24",
+            "metadata": {
+              "description": "Prefix for new virtual subnet"
+            }
         },
         "secGroupName": {
-            "Value": "NSG"
+            "Value": "NSG",
+            "metadata": {
+              "description": "Name for network security group"
+            }
         },
         "secGroupRuleName": {
-            "Value": "AccessToTestWeb"
+            "Value": "AccessToTestWeb",
+            "metadata": {
+              "description": "Name of rule for access to network security group"
+            }
         },
         "secGroupAddressPrefixIn": {
-            "Value": "86.57.255.88/29"
+            "Value": "86.57.255.88/29",
+            "metadata": {
+              "description": "Prefix for network for access to security group"
+            }
         }
     }
 }

@@ -3,13 +3,23 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "storageSKU": {
-            "Value": "Standard_LRS"
+            "Value": "Standard_LRS",
+            "allowedValues": [
+              "Standard_LRS",
+              "Standard_ZRS",
+              "Standard_GRS",
+              "Standard_RAGRS",
+              "Premium_LRS"
+            ],
+            "metadata": {
+              "description": "The type of replication to use for the storage account."
+            }
         },
         "StorageAccName": {
-            "Value": "storageacc"
-        },
-        "location": {
-            "Value": "northeurope"
+            "Value": "storageacc",
+            "metadata": {
+              "description": "The name for storage account."
+            }
         }
     }
 }

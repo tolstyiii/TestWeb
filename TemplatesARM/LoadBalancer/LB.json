@@ -3,16 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "LoadBalancerName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of Load Balancer"
-            }
+            "type": "string"
         },
         "publicIPAddressName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of resource Public IP Address"
-            }
+            "type": "string"
         },
         "location": {
             "type": "string",
@@ -22,34 +16,19 @@
             }
         },
         "frontendIPConfigurationsName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of Load Balancer frontend IPConfigurations"
-            }
+            "type": "string"
         },
         "backendAddressPoolsName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of Load Balancer backend AddressPools"
-            }
+            "type": "string"
         },
         "probeName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of Load Balancer probe"
-            }
+            "type": "string"
         },
         "loadBalancingRulesName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of Load Balancing rule"
-            }
+            "type": "string"
         },
         "inboundNatRulesName": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of Load Balancer Nat rules (RDP)"
-            }
+            "type": "string"
         }
     },
     "variables": {

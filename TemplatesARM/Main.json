@@ -4,17 +4,7 @@
     "parameters": {
         "storageSKU": {
           "type": "string",
-          "allowedValues": [
-            "Standard_LRS",
-            "Standard_ZRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Premium_LRS"
-          ],
-          "defaultValue": "Standard_LRS",
-          "metadata": {
-            "description": "The type of replication to use for the storage account."
-          }
+          "defaultValue": "Standard_LRS"
         },
         "location": {
             "type": "string",
@@ -25,115 +15,67 @@
         },
         "StorageAccName": {
             "type": "string",
-            "defaultValue": "storageacc",
-            "metadata": {
-              "description": "The name for storage account."
-            }
+            "defaultValue": "storageacc"
         },
         "virtualNetworkName": {
             "type": "string",
-            "defaultValue": "VNet",
-            "metadata": {
-                "description": "Name for new virtual network"
-            }
+            "defaultValue": "VNet"
         },
         "addressPrefix": {
             "type": "string",
-            "defaultValue": "192.168.0.0/16",
-            "metadata": {
-                "description": "Prefix for new virtual network"
-            }
+            "defaultValue": "192.168.0.0/16"
         },
         "subnetName": {
             "type": "string",
-            "defaultValue": "subNet",
-            "metadata": {
-                "description": "Name for new virtual sunnet"
-            }
+            "defaultValue": "subNet"
         },
         "subnetPrefix": {
             "type": "string",
-            "defaultValue": "192.168.1.0/24",
-            "metadata": {
-                "description": "Prefix for new virtual subnet"
-            }
+            "defaultValue": "192.168.1.0/24"
         },
         "secGroupName": {
             "type": "string",
-            "defaultValue": "NSG",
-            "metadata": {
-                "description": "Name for network security group"
-            }
+            "defaultValue": "NSG"
         },
         "secGroupRuleName": {
             "type": "string",
-            "defaultValue": "AccessToTestWeb",
-            "metadata": {
-                "description": "Name of rule for access to network security group"
-            }
+            "defaultValue": "AccessToTestWeb"
         },
         "secGroupAddressPrefixIn": {
             "type": "string",
-            "defaultValue": "86.57.255.88/29",
-            "metadata": {
-                "description": "Prefix for network for access to security group"
-            }
+            "defaultValue": "86.57.255.88/29"
         },
         "LoadBalancerName": {
             "type": "string",
-            "defaultValue": "LB",
-            "metadata": {
-                "description": "Name of Load Balancer"
-            }
+            "defaultValue": "LB"
         },
         "publicIPAddressName": {
             "type": "string",
-            "defaultValue": "PublicIP",
-            "metadata": {
-                "description": "Name of resource Public IP Address"
-            }
+            "defaultValue": "PublicIP"
         },
         "frontendIPConfigurationsName": {
             "type": "string",
-            "defaultValue": "LBFrontEnd",
-            "metadata": {
-                "description": "Name of Load Balancer frontend IPConfigurations"
-            }
+            "defaultValue": "LBFrontEnd"
         },
         "backendAddressPoolsName": {
             "type": "string",
-            "defaultValue": "LBBackEnd",
-            "metadata": {
-                "description": "Name of Load Balancer backend AddressPools"
-            }
+            "defaultValue": "LBBackEnd"
         },
         "probeName": {
             "type": "string",
-            "defaultValue": "LoadBalancerProbe80",
-            "metadata": {
-                "description": "Name of Load Balancer probe"
-            }
+            "defaultValue": "LoadBalancerProbe80"
         },
         "loadBalancingRulesName": {
             "type": "string",
-            "defaultValue": "LoadBalancingRule80",
-            "metadata": {
-                "description": "Name of Load Balancing rule"
-            }
+            "defaultValue": "LoadBalancingRule80"
         },
         "inboundNatRulesName": {
             "type": "string",
-            "defaultValue": "RDPVM",
-            "metadata": {
-                "description": "Name of Load Balancer Nat rules (RDP)"
-            }
+            "defaultValue": "RDPVM"
         },
         "adminUsername": {
             "type": "string",
-            "defaultValue": "sa",
-            "metadata": {
-              "description": "Username for the Virtual Machine."
-            }
+            "defaultValue": "sa"
         },
         "adminPassword": {
           "type": "securestring",
@@ -143,60 +85,34 @@
         },
         "VMName": {
           "type": "string",
-          "defaultValue": "Server",
-          "metadata": {
-              "description": "Name of VM"
-          }
+          "defaultValue": "Server"
         },
         "windowsOSVersion": {
           "type": "string",
-          "defaultValue": "2016-Datacenter",
-          "allowedValues": [
-            "2008-R2-SP1",
-            "2012-Datacenter",
-            "2012-R2-Datacenter",
-            "2016-Nano-Server",
-            "2016-Datacenter-with-Containers",
-            "2016-Datacenter"
-          ],
-          "metadata": {
-            "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
-          }
+          "defaultValue": "2016-Datacenter"
         },
         "vmSize": {
           "type": "string",
-          "defaultValue": "Standard_A1",
-          "metadata": {
-            "description": "Sizes of the VM, with count of cores <=2, and RAM between 1792 and 4096 KB"
-          }
+          "defaultValue": "Standard_A1"
         },
         "count": {
             "type": "int",
-            "defaultValue": 2,
-            "minValue": 1,
-            "maxValue": 5,
-            "metadata": {
-                "description": "Count copies of Nics and VMs (every VM had only 1 NIC)"
-            }
+            "defaultValue": 2
         },
         "nicName": {
           "type": "string",
-          "defaultValue": "NICServer",
-          "metadata": {
-              "description": "Name of Load Balancer backend AddressPools"
-          }
+          "defaultValue": "NICServer"
         },
         "availabilitySetName": {
-            "type": "string",
-            "metadata": {
-              "description": "The name for availability set."
-            }
+            "type": "string"
         }
       },
     "variables": {
         "templatesWholePartLink": "https://raw.githubusercontent.com/tolstyiii/TestWeb/master/TemplatesARM/",
-        "templateStorageAccLink": "[concat(variables('templatesWholePartLink'),'StorageAcc/StorageAcc.json')]",
-        "templateStorageAccLinkName": "nestedStorageAcc",
+        "templateStorageAcc": "[concat(variables('templatesWholePartLink'),'StorageAcc/StorageAcc.json')]",
+        "templateStorageAccName": "nestedStorageAcc",
+        "templatePubIPAddress": "[concat(variables('templatesWholePartLink'),'PublicIPAddress/PubIPAddress.json')]",
+        "templatePubIPAddressName": "nestedPubIPAddress",
         "TemplateNetworks": "[concat(variables('templatesWholePartLink'),'Networks/Network.json')]",
         "TemplateNetworksName": "nestedNetworks",
         "TemplateLB": "[concat(variables('templatesWholePartLink'),'LoadBalancer/LB.json')]",
@@ -207,12 +123,12 @@
     "resources": [
         {
             "apiVersion": "2015-01-01",
-            "name": "[variables('templateStorageAccLinkName')]",
+            "name": "[variables('templateStorageAccName')]",
             "type": "Microsoft.Resources/deployments",
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[variables('templateStorageAccLink')]",
+                    "uri": "[variables('templateStorageAcc')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -224,6 +140,29 @@
                     },
                     "location": {
                         "value": "[parameters('location')]"
+                    }
+                }
+            }
+        },
+        {
+            "apiVersion": "2015-01-01",
+            "name": "[variables('templatePubIPAddressName')]",
+            "type": "Microsoft.Resources/deployments",
+            "properties": {
+                "mode": "Incremental",
+                "templateLink": {
+                    "uri": "[variables('templatePubIPAddress')]",
+                    "contentVersion": "1.0.0.0"
+                },
+                "parameters": {
+                    "publicIPAddressName": {
+                        "value": "[parameters('publicIPAddressName')]"
+                    },
+                    "location": {
+                        "value": "[parameters('location')]"
+                    },
+                    "count": {
+                        "value": "[parameters('count')]"
                     }
                 }
             }
@@ -271,7 +210,8 @@
             "name": "[variables('TemplateLBName')]",
             "type": "Microsoft.Resources/deployments",
             "dependsOn": [
-                "[variables('TemplateNetworksName')]"
+                "[variables('TemplateNetworksName')]",
+                "[variables('templatePubIPAddressName')]"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -310,7 +250,7 @@
             "type": "Microsoft.Resources/deployments",
             "dependsOn": [
                 "[variables('TemplateLBName')]",
-                "[variables('templateStorageAccLinkName')]"
+                "[variables('templateStorageAccName')]"
             ],
             "properties": {
                 "mode": "Incremental",

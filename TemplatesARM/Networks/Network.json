@@ -3,28 +3,16 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "virtualNetworkName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name for new virtual network"
-      }
+      "type": "string"
     },
     "addressPrefix": {
-      "type": "string",
-      "metadata": {
-        "description": "Prefix for new virtual network"
-      }
+      "type": "string"
     },
     "subnetName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name for new virtual sunnet"
-      }
+      "type": "string"
     },
     "subnetPrefix": {
-      "type": "string",
-      "metadata": {
-        "description": "Prefix for new virtual subnet"
-      }
+      "type": "string"
     },
     "location": {
         "type": "string",
@@ -34,22 +22,13 @@
         }
       },
     "secGroupName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name for network security group"
-      }
+      "type": "string"
     },
     "secGroupRuleName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of rule for access to network security group"
-      }
+      "type": "string"
     },
     "secGroupAddressPrefixIn": {
-      "type": "string",
-      "metadata": {
-        "description": "Prefix for network for access to security group"
-      }
+      "type": "string"
     }
   },
   "variables": {
