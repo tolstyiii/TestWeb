@@ -111,6 +111,14 @@
               "description": "Username for the Virtual Machine."
             }
         },
+        "adminPassword": {
+        "reference": {
+            "keyVault": {
+              "id": "/subscriptions/58cb12e8-660a-4f54-b734-9fcf499a8643/resourceGroups/testweb/providers/Microsoft.KeyVault/vaults/testweb-keyvault"
+            },
+            "secretName": "testwebVM"
+          }
+        },
         "VMName": {
             "Value": "Server",
             "metadata": {
