@@ -87,6 +87,12 @@
             "metadata": {
               "description": "The name for availability set."
             }
+        },
+        "vmExtensionName": {
+            "value": "DSC",
+            "metadata": {
+                "description": "The name for VM extension."
+              }
         }
     }
 }

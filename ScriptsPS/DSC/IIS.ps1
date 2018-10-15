@@ -1,11 +1,11 @@
 Configuration WebServer {
 
-    Import-DscResource -ModuleName "xPSDesiredStateConfiguration"
+    Import-DscResource -ModuleName "PSDesiredStateConfiguration"
 
     param(
-        [parameter(Mandatory=$true)]
+        [parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
-        [System.String]$Name
+        [String[]]$Name
     )
 
     Node $Name {
@@ -13,11 +13,12 @@ Configuration WebServer {
             Ensure = "Present"
             Name = "Web-Server"
         }
-        WindowsFeature IISManagementTools
-        {
+        WindowsFeature IISManagementTools {
             Ensure = "Present"
             Name = "Web-Mgmt-Tools"
             DependsOn='[WindowsFeature]IIS'
         }
     }
 }
+
+Webserver -InstanceName "testweb-Server1"

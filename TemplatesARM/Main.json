@@ -105,6 +105,9 @@
         },
         "availabilitySetName": {
             "type": "string"
+        },
+        "vmExtensionName": {
+            "type": "string"
         }
       },
     "variables": {
@@ -329,6 +332,9 @@
                     },
                     "availabilitySetName":{
                         "value": "[parameters('availabilitySetName')]"
+                    },
+                    "vmExtensionName":{
+                        "value": "[parameters('vmExtensionName')]"
                     }
                 }
             }
