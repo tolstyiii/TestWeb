@@ -53,6 +53,9 @@
         },
         "availabilitySetName": {
           "type": "string"
+        },
+        "vmExtensionName": {
+          "type": "string"
         }
     },
     "variables": {
@@ -74,7 +77,8 @@
         "windowsOSVersion": "[parameters('windowsOSVersion')]",
         "networkInterfacesID": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]",
         "count": "[parameters('count')]",
-        "storageAccName": "[concat(resourceGroup().name,parameters('storageAccName'))]"
+        "storageAccName": "[concat(resourceGroup().name,parameters('storageAccName'))]",
+        "vmExtensionName": "[parameters('vmExtensionName')]"
     },
     "resources": [
       {
@@ -179,6 +183,35 @@
         "copy": {
             "name": "VMCopy",
             "count": "[variables('count')]"
+        }
+      },
+      {
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "name": "[concat(variables('vmName'),copyIndex(1),'/', variables('vmExtensionName'))]",
+        "apiVersion": "2018-06-01",
+        "location": "[variables('location')]",
+        "dependsOn": [
+          "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'),copyIndex(1))]"
+        ],
+        "properties": {
+          "publisher": "Microsoft.Powershell",
+          "type": "DSC",
+          "typeHandlerVersion": "2.76",
+          "autoUpgradeMinorVersion": true,
+          "settings": {
+            //"ModulesUrl": "[parameters('modulesUrl')]",
+            //"ConfigurationFunction": "[parameters('configurationFunction')]",
+            "Properties": {
+              "MachineName": "[concat(variables('vmName'),copyindex(1))]",
+              "ConfigurationMode": "ApplyAndMonitor",
+              "ActionAfterReboot": "ContinueConfiguration"
+            }
+          },
+          "protectedSettings": null
+        },
+        "copy": {
+          "name": "VMCopy",
+          "count": "[variables('count')]"
         }
       }
     ]
