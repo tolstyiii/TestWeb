@@ -56,6 +56,10 @@
         },
         "vmExtensionName": {
           "type": "string"
+        },
+        "AAName": {
+          "type": "string",
+          "defaultValue": "AutoAcc"
         }
     },
     "variables": {
@@ -78,7 +82,8 @@
         "networkInterfacesID": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]",
         "count": "[parameters('count')]",
         "storageAccName": "[concat(resourceGroup().name,parameters('storageAccName'))]",
-        "vmExtensionName": "[parameters('vmExtensionName')]"
+        "vmExtensionName": "[parameters('vmExtensionName')]",
+        "AAName": "[concat(resourcegroup().name,'-',parameters('AAName'))]"
     },
     "resources": [
       {
@@ -188,7 +193,7 @@
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
         "name": "[concat(variables('vmName'),copyIndex(1),'/', variables('vmExtensionName'))]",
-        "apiVersion": "2018-06-01",
+        "apiVersion": "2018-10-01",
         "location": "[variables('location')]",
         "dependsOn": [
           "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'),copyIndex(1))]"
@@ -196,23 +201,55 @@
         "properties": {
           "publisher": "Microsoft.Powershell",
           "type": "DSC",
-          "typeHandlerVersion": "2.76",
+          "typeHandlerVersion": "2.77",
           "autoUpgradeMinorVersion": true,
-          "settings": {
-            //"ModulesUrl": "[parameters('modulesUrl')]",
-            //"ConfigurationFunction": "[parameters('configurationFunction')]",
-            "Properties": {
-              "MachineName": "[concat(variables('vmName'),copyindex(1))]",
-              "ConfigurationMode": "ApplyAndMonitor",
-              "ActionAfterReboot": "ContinueConfiguration"
+          "protectedSettings": {
+            "Items": {
+              "registrationKeyPrivate": "[listKeys(resourceId('Microsoft.Automation/automationAccounts/', variables('AAName')), '2018-06-30').Keys[0].value]"
             }
           },
-          "protectedSettings": null
+          "settings": {
+            "Properties": [
+              {
+                "Name": "RegistrationKey",
+                "Value": {
+                  "UserName": "NOT_USED",
+                  "Password": "PrivateSettingsRef:registrationKeyPrivate"
+                },
+                "TypeName": "System.Management.Automation.PSCredential"
+              },
+              {
+                "Name": "RegistrationUrl",
+                "Value": "[reference(resourceId('Microsoft.Automation/automationAccounts/', variables('AAName')), '2018-06-30').registrationUrl]",
+                "TypeName": "System.String"
+              },
+              {
+                "Name": "NodeConfigurationName",
+                "Value": "[concat('WebServer.',variables('vmName'),copyindex(1))]",
+                "TypeName": "System.String"
+              },
+              {
+                "Name": "ConfigurationMode",
+                "Value": "ApplyandAutoCorrect",
+                "TypeName": "System.String"
+              },
+              {
+                "Name": "ActionAfterReboot",
+                "Value": "ContinueConfiguration",
+                "TypeName": "System.String"
+              },
+              {
+                "Name": "AllowModuleOverwrite",
+                "Value": true,
+                "TypeName": "System.Boolean"
+              }
+            ]
+          }
         },
-        "copy": {
-          "name": "VMCopy",
-          "count": "[variables('count')]"
-        }
+      "copy": {
+        "name": "VMCopy",
+        "count": "[variables('count')]"
       }
-    ]
+    }
+  ]
 }

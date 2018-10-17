@@ -89,7 +89,7 @@
             }
         },
         "vmExtensionName": {
-            "value": "DSC",
+            "value": "Microsoft.Powershell.DSC",
             "metadata": {
                 "description": "The name for VM extension."
               }

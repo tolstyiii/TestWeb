@@ -1,12 +1,12 @@
 Configuration WebServer {
 
-    Import-DscResource -ModuleName "PSDesiredStateConfiguration"
-
     param(
-        [parameter(Mandatory)]
+        [parameter(Mandatory=$true)]
         [ValidateNotNullOrEmpty()]
         [String[]]$Name
     )
+
+    Import-DscResource -ModuleName "PSDesiredStateConfiguration"
 
     Node $Name {
         WindowsFeature IIS {
@@ -21,4 +21,4 @@ Configuration WebServer {
     }
 }
 
-Webserver -InstanceName "testweb-Server1"
+Webserver -Name "testweb-Server1","testweb-Server2" -OutputPath "d:\Git\ScriptsPS\DSC\"
